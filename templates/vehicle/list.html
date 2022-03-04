@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+
+{% block title %}Available Vehicles{% endblock %} 
+
+{% block content %} 
+
+<ul>
+    {% for vehicle in vehicles %} 
+    <li><a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle }}</a></li>
+    {% empty %} 
+    <li>No vehicle listing</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

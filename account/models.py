@@ -15,6 +15,7 @@ class VendorProfile(models.Model):
         related_name='vendor_profile')
     company_name = models.CharField(max_length=100)
     address = models.CharField(max_length=600)
+    # about
     phone_number = models.CharField(
         max_length=11,
         validators=[MinLengthValidator(11), MaxLengthValidator(11)])
@@ -38,7 +39,6 @@ class CustomerProfile(models.Model):
     government_id = models.FileField(upload_to='identification')
     image = models.ImageField(upload_to='customer/images')
     address = models.CharField(max_length=600)
-    dob = models.DateField()
     license = models.ImageField(upload_to='license')
     verified = models.BooleanField(default=False)
 

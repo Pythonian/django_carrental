@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+
+{% block title %}Car Vendors{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container px-5 my-5">
+        <div class="text-center mb-5 text-white">
+            <h1 class="fw-bolder">Car Vendors</h1>
+            <p class="lead fw-normal text-muted mb-0">Verified and Trusted Car Rental Firms From All Parts of Nigeria.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            {% for vendor in vendors %}
+            {% include 'partials/_vendor_listings.html' %}
+            {% empty %} No vendor listing
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

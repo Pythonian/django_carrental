@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+
+{% block title %}{% if create %}Upload{% else %}Update{% endif %} Vehicle{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="mb-5 text-white">
+            <h1 class="fw-bolder">{% if create %}Upload{% else %}Update{% endif %} Vehicle for Rental</h1>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        {% include 'partials/_alerts.html' %}
+        <form class="row g-3" method="post" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+            {# form.as_p #}
+          <div class="col-md-4">
+            <label for="id_name" class="form-label">Name</label>
+            {{ form.name }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_model" class="form-label">Model</label>
+            {{ form.model }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_license_plate" class="form-label">License Plate</label>
+            {{ form.license_plate }}
+          </div>
+          <div class="col-3">
+            <label for="id_color" class="form-label">Color</label>
+            {{ form.color }}
+          </div>
+          <div class="col-3">
+            <label for="id_no_of_seats" class="form-label">No. of Seats</label>
+            {{ form.no_of_seats }}
+          </div>
+          <div class="col-3">
+            <label for="id_price" class="form-label">Price (per day)</label>
+            {{ form.price }}
+          </div>
+          <div class="col-3">
+            <label for="id_area" class="form-label">Area</label>
+            {{ form.area }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_car_type" class="form-label">Car Type</label>
+            {{ form.car_type }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_gear_type" class="form-label">Gear Type</label>
+            {{ form.gear_type }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_fuel_type" class="form-label">Fuel Type</label>
+            {{ form.fuel_type }}
+          </div>
+          <div class="col-md-8">
+            <label for="id_description" class="form-label">Description</label>
+            {{ form.description }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_image" class="form-label">Car Image</label>
+            {{ form.image }}
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">{% if create %}Upload{% else %}Update{% endif %}</button>
+            {% if not create %}<a class="btn btn-primary" href="{% url 'vehicle:detail' vehicle.id %}">Cancel</a>{% endif %}
+          </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

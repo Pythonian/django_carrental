@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'crispy_forms',
     'crispy_bootstrap5',
-    # 'vehicle.apps.VehicleConfig',
+    'vehicle.apps.VehicleConfig',
 ]
 
 MIDDLEWARE = [

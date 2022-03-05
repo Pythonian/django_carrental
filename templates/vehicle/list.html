@@ -4,12 +4,24 @@
 
 {% block content %} 
 
-<ul>
-    {% for vehicle in vehicles %} 
-    <li><a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle }}</a></li>
-    {% empty %} 
-    <li>No vehicle listing</li>
-    {% endfor %}
-</ul>
+<section class="py-5 bg-dark">
+    <div class="container px-5 my-5">
+        <div class="text-center mb-5 text-white">
+            <h1 class="fw-bolder">Available Vehicles</h1>
+            <p class="lead fw-normal text-muted mb-0">List of available cars for rental from any part of Nigeria.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            {% for vehicle in vehicles %}
+            {% include 'partials/_car_listings.html' %}
+            {% empty %} No vehicle listing
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

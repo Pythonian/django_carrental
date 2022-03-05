@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import User
+from .models import User, VendorProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 
@@ -33,3 +33,10 @@ class CustomerSignUpForm(UserCreationForm):
         user.is_vendor = False
         user.save()
         return user
+
+
+class VendorProfileForm(forms.ModelForm):
+    class Meta:
+        model = VendorProfile
+        fields = ['company_name', 'address', 'phone_number',
+                  'city', 'state', 'image']

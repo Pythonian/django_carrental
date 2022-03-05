@@ -1,0 +1,80 @@
+{% extends "base.html" %} 
+
+{% block title %}Compare Vehicles{% endblock %}
+
+{% block content %} 
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+        	<div class="responsive-table">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Specifications</th>
+                            {% for vehicle in vehicles %}
+                            <td>
+	                            <img src="{{ vehicle.image.url }}" style="width: 150px;" alt="">
+                                <h5><a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }}</a></h5>
+                                <span>&#8358;{{ vehicle.price }} (per day)</span>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Color</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.color }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Color</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.color }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>No. of seats</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.no_of_seats }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Car Type</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.get_car_type_display }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Gear Type</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.get_gear_type_display }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Fuel Type</th>
+                            {% for vehicle in vehicles %}
+                            	<td>{{ vehicle.get_fuel_type_display }}</td>
+                            {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        	<!-- <table class="table">
+            	<tr>
+            		<td></td>
+            		<th>Product title</th>
+            	</tr>
+            	<tr>
+            		<th>Feature 1</th>
+            		<td>Product Feature 1</td>
+            	</tr>
+            	<tr>
+            		<th>Feature 2</th>
+            		<td>Product Feature 2</td>
+            	</tr>
+            </table> -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

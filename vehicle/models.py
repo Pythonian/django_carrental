@@ -1,5 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+from account.models import VendorProfile
+
+User = settings.AUTH_USER_MODEL
 
 
 class Area(models.Model):
@@ -14,23 +17,40 @@ class Vehicle(models.Model):
     SEDAN = 'SE'
     HATCHBACK = 'HB'
     SUV = 'SU'
-    CAR_TYPE_CHOICES = [
+    CAR_TYPE_CHOICES = (
         (SEDAN, 'Sedan'),
         (HATCHBACK, 'Hatchback'),
-        (SUV, 'SUV'),
-    ]
+        (SUV, 'SUV'),)
+
+    AUTOMATIC = 'A'
+    MANUAL = 'M'
+    GEAR_TYPE_CHOICES = (
+        (AUTOMATIC, 'Automatic'),
+        (MANUAL, 'Manual'),)
+
+    PETROL = 'P'
+    GASOLINE = 'G'
+    DIESEL = 'D'
+    FUEL_TYPE_CHOICES = (
+        (PETROL, 'Petrol'),
+        (GASOLINE, 'Gasoline'),
+        (DIESEL, 'Diesel'),)
+
     vendor = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='vendor')
     name = models.CharField(max_length=60)
+    model = models.CharField(max_length=10, blank=True)
     color = models.CharField(max_length=20)
     no_of_seats = models.IntegerField()
     description = models.TextField(max_length=5000)
     car_type = models.CharField(max_length=2, choices=CAR_TYPE_CHOICES)
+    gear_type = models.CharField(max_length=1, choices=GEAR_TYPE_CHOICES)
+    fuel_type = models.CharField(max_length=1, choices=FUEL_TYPE_CHOICES)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='vehicle')
     is_available = models.BooleanField(default=True)
     license_plate = models.CharField(max_length=20, unique=True)
-    area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -63,10 +83,10 @@ class Rent(models.Model):
         max_length=1, choices=REQUEST_STATUS_CHOICES, default=PENDING)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     customer = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='rented_by')
-    vendor = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='vendor_requested',
-        blank=True, null=True)
+        User, on_delete=models.CASCADE, related_name='rents')
+    # vendor = models.ForeignKey(
+    #     User, on_delete=models.CASCADE, related_name='vendor_requested',
+    #     blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

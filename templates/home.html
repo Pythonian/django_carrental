@@ -5,7 +5,7 @@
 <header class="bg-dark py-5">
     <div class="container px-5">
         <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
+            <div class="col-6">
                 <div class="my-5 text-center text-xl-start">
                     <h1 class="display-5 fw-bolder text-white mb-2">Car Rental Service for Multiple Car Vendors</h1>
                     <p class="lead fw-normal text-white-50 mb-4">We provide effective services for customers in need of vehicles to link up with car vendors who have cars available for rentals.</p>
@@ -23,17 +23,46 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                <form action="">
+            <div class="col-6 d-none d-xl-block text-center">
+                <form action="{% url 'search' %}" method="get">
                     <div class="form-group mb-3">
-                        <input class="form-control form-control-lg" id="area" type="text" placeholder="Enter area" />
+                        <input class="form-control form-control-lg" id="name" type="text" placeholder="Enter car name" name="car_name" />
                     </div>
-                    <div class="form-group mb-3">
-                        <input class="form-control form-control-lg" id="area" type="text" placeholder="Enter area" />
+                    <div class="row">
+                       <div class="col-6 form-group mb-3">
+                            <input class="form-control form-control-lg" id="min_price" type="number" placeholder="Enter min price" name="min_price" />
+                        </div>
+                        <div class="col-6 form-group mb-3">
+                            <input class="form-control form-control-lg" id="max_price" type="number" placeholder="Enter max price" name="max_price" />
+                        </div> 
                     </div>
-                    <div class="form-group mb-3">
-                        <input class="form-control form-control-lg" id="area" type="text" placeholder="Enter area" />
+                    <div class="row">
+                        <div class="col-4 form-group mb-3">
+                            <select name="gear_type" class="form-select form-control-lg" id="id_gear_type">
+                                <option value="" selected>--Gear Type--</option>
+                                {% for vehicle in vehicles %}
+                                <option value="{{ vehicle.gear_type }}">{{ vehicle.get_gear_type_display }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-4 form-group mb-3">
+                            <select name="car_type" class="form-select form-control-lg" id="id_car_type">
+                                <option value="" selected>--Car Type--</option>
+                                {% for vehicle in vehicles %}
+                                <option value="{{ vehicle.car_type }}">{{ vehicle.get_car_type_display }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-4 form-group mb-3">
+                            <select name="fuel_type" class="form-select form-control-lg" id="id_fuel_type">
+                                <option value="" selected>--Fuel Type--</option>
+                                {% for vehicle in vehicles %}
+                                <option value="{{ vehicle.fuel_type }}">{{ vehicle.get_fuel_type_display }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
+                    
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Search</button>
                     </div>

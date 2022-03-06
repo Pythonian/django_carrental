@@ -1,18 +1,18 @@
 from django.urls import path
 
-from .views import (
-    vehicle_create, vehicle_delete, vehicle_detail,
-    vehicle_list, vehicle_update, vendor_list, compare_vehicles)
+from . import views
 
 app_name = 'vehicle'
 
 urlpatterns = [
-    path('create/', vehicle_create, name='create'),
-    path('vendors/', vendor_list, name='vendors'),
-    path('compare/', compare_vehicles, name='compare'),
-    path('<int:pk>/', vehicle_detail, name='detail'),
-    path('<int:pk>/update/', vehicle_update, name='update'),
-    path('<int:pk>/delete/', vehicle_delete, name='delete'),
-    path('', vehicle_list, name='list'),
+    path('create/', views.vehicle_create, name='create'),
+    path('vendors/', views.vendor_list, name='vendors'),
+    path('compare/', views.compare_vehicles, name='compare'),
+    path('add-to-compare/<int:pk>/',
+         views.add_to_compare, name='add_to_compare'),
+    path('<int:pk>/', views.vehicle_detail, name='detail'),
+    path('<int:pk>/update/', views.vehicle_update, name='update'),
+    path('<int:pk>/delete/', views.vehicle_delete, name='delete'),
+    path('', views.vehicle_list, name='list'),
 
 ]

@@ -36,7 +36,24 @@ class CustomerSignUpForm(UserCreationForm):
 
 
 class VendorProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['company_name'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['address'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['about'].widget.attrs.update(
+            {'class': 'form-control', 'rows': '5'})
+        self.fields['phone_number'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['city'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['state'].widget.attrs.update(
+            {'class': 'form-control'})
+        self.fields['image'].widget.attrs.update(
+            {'class': 'form-control'})
+
     class Meta:
         model = VendorProfile
         fields = ['company_name', 'address', 'phone_number',
-                  'city', 'state', 'image']
+                  'city', 'state', 'image', 'about']

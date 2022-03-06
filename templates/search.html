@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+
+{% block title %}Search Results{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container px-5 my-5">
+        <div class="text-center mb-5 text-white">
+            <h1 class="fw-bolder">Search Results</h1>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5">
+            {% for vehicle in vehicles %}
+            {% include 'partials/_car_listings.html' %}
+            {% empty %} No vehicle listing
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

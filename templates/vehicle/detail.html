@@ -18,8 +18,14 @@
                     <div class="mb-2 d-flex justify-content-between">
                     	<h3>&#8358;{{ vehicle.price }} / day</h3>
                     	<span>
-                    		<a href="">Add to Compare</a> |
-                    		<a href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
+                    		{% if request.user.is_authenticated %}
+                            {% if compared %}
+                                <a href="{% url 'vehicle:add_to_compare' vehicle.id %}">Remove from Compare</a> 
+                            {% else %}
+                                <a href="{% url 'vehicle:add_to_compare' vehicle.id %}">Add to Compare</a>
+                            {% endif %}
+                    		| <a href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
+                            {% endif %}
                     	</span>
                     </div>
                 </header>

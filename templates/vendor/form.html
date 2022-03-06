@@ -1,0 +1,58 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block title %}{% if create %}Create{% else %}Update{% endif %} Profile{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="mb-5 text-white">
+            <h1 class="fw-bolder">{% if create %}Create{% else %}Update{% endif %} Profile</h1>
+            {% if create %}<p>Before you can start using this platform, you will need to create a Profile for your Car Rental Firm.</p>{% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        {% include 'partials/_alerts.html' %}
+        <form class="row g-3" method="post" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+            {{ form.errors}}
+          <div class="col-md-4">
+            <label for="id_company_name" class="form-label">Company Name*</b></label>
+            {{ form.company_name }}
+          </div>
+          <div class="col-md-8">
+            <label for="id_address" class="form-label">Address*</b></label>
+            {{ form.address }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_phone_number" class="form-label">Phone number*</b></label>
+            {{ form.phone_number }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_city" class="form-label">City*</b></label>
+            {{ form.city }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_state" class="form-label">State*</b></label>
+            {{ form.state }}
+          </div>
+          <div class="col-md-8">
+            <label for="id_about" class="form-label">Description*</b></label>
+            {{ form.about }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_image" class="form-label">Car Image*</b></label>
+            {{ form.image }}
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">{% if create %}Create{% else %}Update{% endif %}</button>
+          </div>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

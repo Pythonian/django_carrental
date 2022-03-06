@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from account.models import VendorProfile
 from .models import Vehicle, Rent
@@ -22,9 +23,13 @@ def vehicle_list(request):
 
 def vehicle_detail(request, pk):
     vehicle = get_object_or_404(Vehicle, id=pk)
+    compared = bool
+    if vehicle.compares.filter(id=request.user.id).exists():
+        compared = True
 
     return render(
-        request, 'vehicle/detail.html', {'vehicle': vehicle})
+        request, 'vehicle/detail.html', {'vehicle': vehicle,
+                                         'compared': compared})
 
 
 def rented_vehicles(request):
@@ -34,12 +39,25 @@ def rented_vehicles(request):
         request, 'rented_vehicles.html', {'vehicles': vehicles})
 
 
+@login_required
+def add_to_compare(request, pk):
+    vehicle = get_object_or_404(Vehicle, id=pk)
+    if vehicle.compares.filter(id=request.user.id).exists():
+        vehicle.compares.remove(request.user)
+    else:
+        vehicle.compares.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+@login_required
 def compare_vehicles(request):
-    vehicles = Vehicle.objects.filter(is_available=True)[:3]
+    vehicles = Vehicle.objects.filter(
+        is_available=True).filter(compares=request.user)[:3]
     return render(
         request, 'vehicle/compare.html', {'vehicles': vehicles})
 
 
+@login_required
 def vehicle_create(request):
     if request.method == 'POST':
         form = VehicleForm(request.POST, request.FILES)

@@ -1,22 +1,12 @@
-Menu
-	Home: Search form
-
-Vendor: After signup, 
-		redirect to create Company profile, 
-		then redirect to create a Car for rent
-	Vendor page: Profile / Cars / Manage requests
+Vendor:
 	Vendor manage car orders
-	Vendor edit profile
 
-Customer
+Customer: After signup, redirect to create Customer profile,
+			then redirect to Car listing page
 	Customer profile
-	Customer past car rental orders
-	Price comparisons of Cars in a Compare page
 	Previous rentals
+	View vendor profile
 	// Sent rental request
 
-Car suggestions: Price, Availability
-Verification of users identity
+Verification of customer identity
 Payment processing
-
-Filter: Area, Car Type, No of seats

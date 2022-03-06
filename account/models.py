@@ -15,7 +15,7 @@ class VendorProfile(models.Model):
         related_name='vendor_profile')
     company_name = models.CharField(max_length=100)
     address = models.CharField(max_length=600)
-    # about
+    about = models.TextField()
     phone_number = models.CharField(
         max_length=11,
         validators=[MinLengthValidator(11), MaxLengthValidator(11)])

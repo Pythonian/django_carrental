@@ -4,7 +4,6 @@ from .models import Vehicle, Rent
 
 
 class VehicleForm(forms.ModelForm):
-    error_css_class = 'text-danger'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

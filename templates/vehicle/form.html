@@ -17,7 +17,6 @@
         {% include 'partials/_alerts.html' %}
         <form class="row g-3" method="post" enctype="multipart/form-data" action="">
             {% csrf_token %}
-            {# form.as_p #}
           <div class="col-md-4">
             <label for="id_name" class="form-label">Name</label>
             {{ form.name }}

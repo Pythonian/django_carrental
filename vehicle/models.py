@@ -51,6 +51,8 @@ class Vehicle(models.Model):
     is_available = models.BooleanField(default=True)
     license_plate = models.CharField(max_length=20, unique=True)
     area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    compares = models.ManyToManyField(
+        User, related_name='compare', blank=True, default=None)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

@@ -12,4 +12,10 @@ urlpatterns = [
          views.CustomerSignUpView.as_view(), name='customer_signup'),
     path('signup/carvendor/',
          views.VendorSignUpView.as_view(), name='vendor_signup'),
+    path('vendor/create-profile/',
+         views.vendor_create_profile, name='vendor_create_profile'),
+    path('vendor/update-profile/',
+         views.vendor_update_profile, name='vendor_update_profile'),
+    path('vendor/my-vehicles/',
+         views.vendor_manage_vehicles, name='vendor_manage_vehicles'),
 ]

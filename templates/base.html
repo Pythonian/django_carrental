@@ -23,15 +23,17 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'vehicle:list' %}">Car Listings</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'vehicle:vendors' %}">Vendor Listings</a></li>
+                        {# if not request.user.is_vendor #}
                         <li class="nav-item"><a class="nav-link" href="{% url 'vehicle:compare' %}">Compare Vehicles</a></li>
+                        {# endif #}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                 {% if request.user.is_authenticated %}
                                 {% if request.user.is_vendor %}
                                     <li><a class="dropdown-item" href="{% url 'vehicle:create' %}">Upload Vehicle</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Update Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Manage Vehicles</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'vendor_update_profile' %}">Update Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'vendor_manage_vehicles' %}">Manage Vehicles</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Manage Orders</a></li>
                                 {% else %}
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Update Profile</a></li>

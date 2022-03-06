@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from account.models import VendorProfile
 
 User = settings.AUTH_USER_MODEL
 
@@ -74,7 +73,6 @@ class Rent(models.Model):
     ]
     date_of_booking = models.DateField(blank=True, null=True)
     date_of_return = models.DateField(blank=True, null=True)
-    total_days = models.IntegerField()
     advance_amount = models.IntegerField(blank=True, null=True)
     total_amount = models.DecimalField(
         max_digits=6, decimal_places=2,
@@ -97,3 +95,20 @@ class Rent(models.Model):
 
     def __str__(self):
         return f"{self.customer.name} - {self.vehicle.name}"
+
+    @property
+    def total_days(self):
+        date_of_booking = self.date_of_booking
+        date_of_return = self.date_of_return
+        if date_of_booking > date_of_return:
+            return
+        dates = (date_of_return - date_of_booking)
+        return dates.days
+
+    @property
+    def get_cost(self):
+        return self.vehicle.price
+
+    @property
+    def get_total_cost(self):
+        return self.get_cost * self.total_days

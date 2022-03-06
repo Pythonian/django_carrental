@@ -1,0 +1,57 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block title %}Confirm Car Booking{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="mb-5 text-white">
+            <h1 class="fw-bolder">Confirm Car Booking for {{ rent.vehicle.name }}</h1>
+            <p>Before you proceed with payment, please cross-check your booking and ensure you are satisfied before continuing.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 mb-5">
+        <div class="row">
+          <div class="col-7 mx-auto">
+            <div class="row">
+                <div class="mb-3 col-6">
+                    <label>Date of booking:</label>
+                    <input type="text" class="form-control" value="{{ rent.date_of_booking }}" readonly>
+                </div>
+                <div class="mb-3 col-6">
+                    <label>Date of return:</label>
+                    <input type="text" class="form-control" value="{{ rent.date_of_return }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-4">
+                    <label>Total no. of Days:</label>
+                    <input type="text" class="form-control" value="{{ rent.total_days }}" readonly>
+                </div>
+                <div class="mb-3 col-4">
+                    <label>Amount per day:</label>
+                    <input type="text" class="form-control" value="{{ rent.vehicle.price }}" readonly>
+                </div>
+                <div class="mb-3 col-4">
+                    <label>Total amount:</label>
+                    <input type="text" class="form-control" value="{{ rent.get_total_cost }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <a href="" class="btn btn-success">Confirm Order</a> 
+                    <a href="{% url 'vehicle:detail' rent.vehicle.id %}">Go back</a>   
+                </div>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

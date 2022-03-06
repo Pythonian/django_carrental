@@ -3,18 +3,18 @@
 
 {% block content %}
 <header class="bg-dark py-5">
-    <div class="container px-5">
+    <div class="container">
         <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-6">
+            <div class="col-7">
                 <div class="my-5 text-center text-xl-start">
                     <h1 class="display-5 fw-bolder text-white mb-2">Car Rental Service for Multiple Car Vendors</h1>
                     <p class="lead fw-normal text-white-50 mb-4">We provide effective services for customers in need of vehicles to link up with car vendors who have cars available for rentals.</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                         {% if request.user.is_authenticated %}
                             {% if request.user.is_vendor %}
-                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="">My Profile</a>
+                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'vehicle:create' %}">Upload new Car</a>
                             {% else %}
-                            <a class="btn btn-outline-light btn-lg px-4" href="#!">Find Available Cars</a>
+                            <a class="btn btn-outline-light btn-lg px-4" href="{% url 'vehicle:list' %}">Find Available Cars</a>
                             {% endif %}
                         {% else %}
                             <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'vendor_signup' %}">Setup vendor account</a>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 d-none d-xl-block text-center">
+            <div class="col-5 d-none d-xl-block text-center">
                 <form action="{% url 'search' %}" method="get">
                     <div class="form-group mb-3">
                         <input class="form-control form-control-lg" id="name" type="text" placeholder="Enter car name" name="car_name" />

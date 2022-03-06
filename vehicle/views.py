@@ -26,10 +26,32 @@ def vehicle_detail(request, pk):
     compared = bool
     if vehicle.compares.filter(id=request.user.id).exists():
         compared = True
+    if request.method == 'POST':
+        form = RentForm(request.POST)
+        if form.is_valid():
+            rent = form.save(commit=False)
+            rent.customer = request.user
+            rent.vehicle = vehicle
+            rent.save()
+            request.session['rent_id'] = rent.id
+            return redirect('vehicle:confirm_booking')
+    else:
+        form = RentForm()
 
     return render(
         request, 'vehicle/detail.html', {'vehicle': vehicle,
-                                         'compared': compared})
+                                         'compared': compared,
+                                         'form': form})
+
+
+@login_required
+def confirm_booking(request):
+    rent_id = request.session.get('rent_id')
+    rent = get_object_or_404(Rent, id=rent_id)
+
+    return render(
+        request, 'vehicle/confirm_booking.html',
+        {'rent': rent})
 
 
 def rented_vehicles(request):
@@ -108,47 +130,6 @@ def vehicle_delete(request, pk):
     return render(request,
                   'vehicle/confirm_delete.html',
                   {'vehicle': vehicle})
-
-
-@login_required
-def rent_vehicle(request):
-    vehicle = get_object_or_404(Vehicle, id=id)
-    if request.method == 'POST':
-        form = RentForm(request.POST)
-        if form.is_valid():
-            rent = form.save(commit=False)
-            rent.customer = request.user
-            rent.vendor = request.user
-            rent.vehicle = vehicle
-            rent.save()
-            return redirect('vehicle_detail', args=[vehicle.id])
-    else:
-        form = RentForm()
-    return render(request, '', {})
-
-    # RentVehicle_Date_of_Booking=request.POST.get('RentVehicle_Date_of_Booking','')
-    # RentVehicle_Date_of_Return=request.POST.get('RentVehicle_Date_of_Return','')
-    # Total_days=request.POST.get('Total_days','')
-    # RentVehicle_Total_amount=request.POST.get('RentVehicle_Total_amount','')
-    # Vehicle_license_plate=request.POST.get('Vehicle_license_plate','')
-    # RentVehicle_Date_of_Booking=request.POST.get('RentVehicle_Date_of_Booking','')
-
-    # RentVehicle_Date_of_Booking = datetime.strptime(
-    #     RentVehicle_Date_of_Booking, '%b. %d, %Y').date()
-    # RentVehicle_Date_of_Return = datetime.strptime(
-    #     RentVehicle_Date_of_Return, '%b. %d, %Y').date()
-
-    # rentvehicle = RentVehicle(
-    #     RentVehicle_Date_of_Booking=RentVehicle_Date_of_Booking,
-    #     RentVehicle_Date_of_Return=RentVehicle_Date_of_Return,
-    #     Total_days=Total_days,RentVehicle_Total_amount=RentVehicle_Total_amount,
-    #     Vehicle_license_plate=Vehicle_license_plate,customer_email=user_email)
-
-    # rentvehicle.save()
-
-    # customer = Customer.objects.filter(customer_email=user_email)
-    # if customer.exists():
-    #     return redirect("/SentRequests/")
 
 
 def check_availability(request, license_plate):

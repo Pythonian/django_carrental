@@ -36,7 +36,7 @@
                                     <li><a class="dropdown-item" href="{% url 'vendor_manage_vehicles' %}">Manage Vehicles</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Manage Orders</a></li>
                                 {% else %}
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Update Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'customer_update_profile' %}">Update Profile</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Previous Rentals</a></li>
                                 {% endif %}
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>

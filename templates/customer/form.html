@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %}
+
+{% block title %}{% if create %}Create{% else %}Update{% endif %} Profile{% endblock %} 
+
+{% block content %} 
+
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="mb-5 text-white">
+            <h1 class="fw-bolder">{% if create %}Create{% else %}Update{% endif %} Profile</h1>
+            {% if create %}<p>Before you can start using this platform, you will need to create a Profile for your Account.</p>{% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row">
+          <div class="col-7 mx-auto">
+            {% include 'partials/_alerts.html' %}
+            <form class="row g-3" method="post" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">{% if create %}Create{% else %}Update{% endif %}</button>
+            </form>
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

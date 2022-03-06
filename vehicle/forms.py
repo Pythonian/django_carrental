@@ -46,6 +46,13 @@ class VehicleForm(forms.ModelForm):
 
 
 class RentForm(forms.ModelForm):
+    date_of_booking = forms.DateField(
+        widget=forms.TextInput(
+            attrs={'type': 'date', 'class': 'form-control'}))
+    date_of_return = forms.DateField(
+        widget=forms.TextInput(
+            attrs={'type': 'date', 'class': 'form-control'}))
+
     class Meta:
         model = Rent
-        exclude = ['vehicle', 'customer', 'vendor', 'created', 'updated']
+        fields = ['date_of_booking', 'date_of_return']

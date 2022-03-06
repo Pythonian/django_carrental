@@ -2,12 +2,14 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import User
+from . import verify
 from vehicle.models import Vehicle
 
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 from .forms import (
-    VendorSignUpForm, CustomerSignUpForm, VendorProfileForm)
+    VendorSignUpForm, CustomerSignUpForm, VendorProfileForm,
+    CustomerProfileForm, VerifyForm)
 
 
 class VendorSignUpView(CreateView):
@@ -23,21 +25,6 @@ class VendorSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('vendor_create_profile')
-
-
-class CustomerSignUpView(CreateView):
-    model = User
-    form_class = CustomerSignUpForm
-    template_name = 'registration/signup.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'a customer'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
 
 
 @login_required
@@ -93,3 +80,78 @@ def vendor_manage_vehicles(request):
     vehicles = Vehicle.objects.filter(vendor=request.user)
     return render(
         request, 'vendor/vehicles.html', {'vehicles': vehicles})
+
+
+class CustomerSignUpView(CreateView):
+    model = User
+    form_class = CustomerSignUpForm
+    template_name = 'registration/signup.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'a customer'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('customer_create_profile')
+
+
+@login_required
+def customer_create_profile(request):
+    if request.method == 'POST':
+        form = CustomerProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            customer = form.save(commit=False)
+            customer.user = request.user
+            customer.save()
+            verify.send(form.cleaned_data.get('phone_number'))
+            messages.success(
+                request, 'Profile created. Please verify your phone number')
+            return redirect('customer_verification')
+        else:
+            messages.warning(
+                request, 'Error creating your profile. Please check below.')
+    else:
+        form = CustomerProfileForm()
+
+    return render(request,
+                  'customer/form.html',
+                  {'form': form, 'create': True})
+
+
+@login_required
+def customer_verification(request):
+    if request.method == 'POST':
+        form = VerifyForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data.get('code')
+            if verify.check(request.user.customer_profile.phone_number, code):
+                request.user.customer_profile.verified = True
+                request.user.customer_profile.save()
+                return redirect('home')
+    else:
+        form = VerifyForm()
+    return render(request, 'customer/verify.html', {'form': form})
+
+
+@login_required
+def customer_update_profile(request):
+    if request.method == 'POST':
+        form = CustomerProfileForm(
+            request.POST, request.FILES,
+            instance=request.user.customer_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile was successully updated.')
+            return redirect('customer_update_profile')
+        else:
+            messages.error(
+                request, 'Error updating your profile. Please check below.')
+    else:
+        form = CustomerProfileForm(
+            instance=request.user.customer_profile)
+
+    return render(request,
+                  'customer/form.html',
+                  {'form': form})

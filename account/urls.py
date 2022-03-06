@@ -8,8 +8,16 @@ urlpatterns = [
     path('login/',
          auth_views.LoginView.as_view(
              redirect_authenticated_user=True), name='login'),
+
     path('signup/customer/',
          views.CustomerSignUpView.as_view(), name='customer_signup'),
+    path('customer/create-profile/',
+         views.customer_create_profile, name='customer_create_profile'),
+    path('customer/update-profile/',
+         views.customer_update_profile, name='customer_update_profile'),
+    path('customer/verify/',
+         views.customer_verification, name='customer_verification'),
+
     path('signup/carvendor/',
          views.VendorSignUpView.as_view(), name='vendor_signup'),
     path('vendor/create-profile/',

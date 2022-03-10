@@ -1,28 +1,28 @@
-<div class="col-lg-4 mb-5">
-    <div class="card h-100 shadow border-0">
+<div class="col-lg-4 col-md-6">
+    <div class="card mb-4 shadow border-0">
         {% if vehicle.image %}
-        <img class="card-img-top" src="{{ vehicle.image.url }}" alt="{{ vehicle.name }}" />
+        <img src="{{ vehicle.image.url }}" class="card-img-top" height="200" alt="{{ vehicle.name }}">
         {% endif %}
-        <div class="card-body p-4">
-            <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ vehicle.area.city }}</div>
-            <a class="text-decoration-none link-dark stretched-link" href="{% url 'vehicle:detail' vehicle.id %}"><h5 class="card-title mb-3">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</h5></a>
-            <p class="card-text mb-0">{{ vehicle.description|truncatechars:60 }}</p>
-        </div>
-        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-            <div class="d-flex align-items-end justify-content-between">
-                <div class="d-flex align-items-center">
-                    <div class="small">
-                        <div class="fw-bold">&#8358;{{ vehicle.price }} (per day)</div>
-                        <div class="text-muted">
-                            <b>Seats:</b> {{ vehicle.no_of_seats }}
-                            &middot;
-                            <b>Fuel:</b> {{ vehicle.get_fuel_type_display }}
-                            &bull;
-                            <b>Gear:</b> {{ vehicle.get_gear_type_display }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="card-body">
+            <div class="h5">&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></div>
+            <p> <i class="fa-solid fa-car"></i> {{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %} </p>
+            <hr>
+            <div class="mb-3 text-muted"> 
+                <span class="d-inline-block me-2"> 
+                    <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
+                </span> 
+                <span class="d-inline-block me-2"> 
+                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.get_fuel_type_display }}
+                </span> 
+                <span class="d-inline-block me-2"> 
+                    <i class="fa-solid fa-gear"></i> {{ vehicle.get_gear_type_display }}
+                </span>                                
+            </div> 
+            {% if request.user == vehicle.vendor %}
+                <a class="btn btn-primary" href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
+            {% else %}
+                <a href="{% url 'vehicle:detail' vehicle.id %}" class="btn btn-primary">Details</a> 
+            {% endif %}
         </div>
     </div>
 </div>

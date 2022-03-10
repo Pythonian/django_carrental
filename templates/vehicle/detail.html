@@ -7,31 +7,29 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
-            <!-- Post content-->
             <article>
             	{% include 'partials/_alerts.html' %}
-                <!-- Post header-->
                 <header class="mb-4">
-                    <!-- Post title-->
                     <h1 class="fw-bolder mb-1">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</h1>
-                    <!-- Post meta content-->
                     <div class="mb-2 d-flex justify-content-between">
-                    	<h3>&#8358;{{ vehicle.price }} / day</h3>
+                    	<h3>&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></h3>
                     	<span>
                     		{% if request.user.is_authenticated %}
-                            {% if compared %}
-                                <a href="{% url 'vehicle:add_to_compare' vehicle.id %}">Remove from Compare</a> 
-                            {% else %}
-                                <a href="{% url 'vehicle:add_to_compare' vehicle.id %}">Add to Compare</a>
-                            {% endif %}
-                    		| <a href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
+                                {% if compared %}
+                                    <a class="btn btn-warning" href="{% url 'vehicle:add_to_compare' vehicle.id %}">Remove from Compare</a> 
+                                {% else %}
+                                    <a class="btn btn-success" href="{% url 'vehicle:add_to_compare' vehicle.id %}">Add to Compare</a>
+                                {% endif %}
+                                {% if request.user == vehicle.vendor %}
+                    		    <a class="btn btn-primary" href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
+                                {% endif %}
                             {% endif %}
                     	</span>
                     </div>
                 </header>
-                <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{ vehicle.image.url }}" alt="{{ vehicle.name }}" /></figure>
-                <!-- Post content-->
+                <figure class="mb-4">
+                    <img class="img-fluid rounded" src="{{ vehicle.image.url }}" alt="{{ vehicle.name }}" />
+                </figure>
                 <section class="mb-5">
                 	<h4>Vehicle Description</h4>
                     <p class="fs-5 mb-4">{{ vehicle.description|linebreaks }}</p>
@@ -42,6 +40,15 @@
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="mb-0">Vendor</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            <a href="">{{ vehicle.vendor.vendor_profile.company_name }}</a>
+                        </div>
+                    </div>
+                    <hr>
                     <div class="row">
                         <div class="col-sm-4">
                             <h6 class="mb-0">Color</h6>
@@ -88,16 +95,23 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-4">
-                <div class="card-header">Book Now</div>
-                <div class="card-body">
-                    <form method="post" action="">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" class="btn btn-success" value="Place booking" />
-                    </form>
+            
+            {% if request.user.is_authenticated %}
+                {% if request.user != vehicle.vendor %}
+                <div class="card mb-4">
+                    <div class="card-header">Book Now</div>
+                    <div class="card-body">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" class="btn btn-success" value="Place booking" />
+                        </form>
+                    </div>
                 </div>
-            </div>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}?next={% url 'vehicle:detail' vehicle.id %}" class="btn btn-success d-block">Login to Book Vehicle</a>
+            {% endif %}
         </div>
     </div>
 </div>

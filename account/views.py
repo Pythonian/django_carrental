@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import User
 from . import verify
 from vehicle.models import Vehicle
-
+from carrental.utils import mk_paginator
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 from .forms import (
@@ -78,6 +78,7 @@ def vendor_update_profile(request):
 @login_required
 def vendor_manage_vehicles(request):
     vehicles = Vehicle.objects.filter(vendor=request.user)
+    vehicles = mk_paginator(request, vehicles, 2)
     return render(
         request, 'vendor/vehicles.html', {'vehicles': vehicles})
 

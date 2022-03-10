@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-4 form-group mb-3">
                             <select name="gear_type" class="form-select form-control-lg" id="id_gear_type">
-                                <option value="" selected>--Gear Type--</option>
+                                <option value="" selected>Gear Type</option>
                                 {% for vehicle in vehicles %}
                                 <option value="{{ vehicle.gear_type }}">{{ vehicle.get_gear_type_display }}</option>
                                 {% endfor %}
@@ -47,15 +47,15 @@
                         </div>
                         <div class="col-4 form-group mb-3">
                             <select name="car_type" class="form-select form-control-lg" id="id_car_type">
-                                <option value="" selected>--Car Type--</option>
-                                {% for vehicle in vehicles %}
-                                <option value="{{ vehicle.car_type }}">{{ vehicle.get_car_type_display }}</option>
+                                <option value="" selected>Car Type</option>
+                                {% for value, text in vehicle.car_type.field.choices %}
+                                <option value="{{ value }}">{{ text }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="col-4 form-group mb-3">
                             <select name="fuel_type" class="form-select form-control-lg" id="id_fuel_type">
-                                <option value="" selected>--Fuel Type--</option>
+                                <option value="" selected>Fuel Type</option>
                                 {% for vehicle in vehicles %}
                                 <option value="{{ vehicle.fuel_type }}">{{ vehicle.get_fuel_type_display }}</option>
                                 {% endfor %}

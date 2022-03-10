@@ -2,9 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from carrental.utils import mk_paginator
 from account.models import VendorProfile
 from .models import Vehicle, Rent
 from .forms import VehicleForm, RentForm
+
+
 
 
 def vendor_list(request):
@@ -15,7 +18,13 @@ def vendor_list(request):
 
 
 def vehicle_list(request):
-    vehicles = Vehicle.objects.filter(is_available=True)
+    if request.user.is_authenticated:
+        vehicles = Vehicle.objects.filter(
+            is_available=True).exclude(vendor=request.user)
+    else:
+        vehicles = Vehicle.objects.filter(
+            is_available=True)
+    vehicles = mk_paginator(request, vehicles, 3)
 
     return render(
         request, 'vehicle/list.html', {'vehicles': vehicles})
@@ -66,8 +75,12 @@ def add_to_compare(request, pk):
     vehicle = get_object_or_404(Vehicle, id=pk)
     if vehicle.compares.filter(id=request.user.id).exists():
         vehicle.compares.remove(request.user)
+        messages.success(
+            request, "You've removed the vehicle from comparison")
     else:
         vehicle.compares.add(request.user)
+        messages.success(
+            request, "You've added this vehicle for comparison")
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

@@ -8,7 +8,12 @@ def is_valid_query_paramter(param):
 
 
 def home(request):
-    vehicles = Vehicle.objects.filter(is_available=True)[:3]
+    if request.user.is_authenticated:
+        vehicles = Vehicle.objects.filter(
+            is_available=True).exclude(vendor=request.user)[:3]
+    else:
+        vehicles = Vehicle.objects.filter(
+            is_available=True)[:3]
     vendors = VendorProfile.objects.all()
 
     return render(

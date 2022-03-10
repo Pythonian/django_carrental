@@ -21,6 +21,7 @@
             {% empty %} No vehicle listing
             {% endfor %}
         </div>
+        {% include 'partials/_pagination.html' with page_obj=vehicles %}
     </div>
 </section>
 

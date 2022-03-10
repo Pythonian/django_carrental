@@ -4,6 +4,13 @@ Vendor:
 Customer:
 	Customer profile
 	Previous rentals
-	View vendor profile
 
 Payment processing
+
+* Can a vendor book another vendor's car?
+Vendor profile: 
+	Vehicles
+	Profile details
+	Update profile
+	Change password
+	Manage orders

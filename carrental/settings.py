@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^ca9zhnlft!)8o68#kh4i63rit5w%&85jp5ik1as&j%&y9g#*#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / 'static_root'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
@@ -143,6 +145,6 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
-TWILIO_VERIFY_SERVICE_SID = ''
-TWILIO_ACCOUNT_SID = ''
-TWILIO_AUTH_TOKEN = ''
+TWILIO_VERIFY_SERVICE_SID = 'aaa'
+TWILIO_ACCOUNT_SID = 'aaa'
+TWILIO_AUTH_TOKEN = 'aaa'

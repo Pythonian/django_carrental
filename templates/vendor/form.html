@@ -16,7 +16,9 @@
 
 <section class="py-5">
     <div class="container px-5 my-5">
-        {% include 'partials/_alerts.html' %}
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          {% include 'partials/_alerts.html' %}
         <form class="row g-3" method="post" enctype="multipart/form-data" action="">
             {% csrf_token %}
             {{ form.errors}}
@@ -45,13 +47,16 @@
             {{ form.about }}
           </div>
           <div class="col-md-4">
-            <label for="id_image" class="form-label">Car Image*</b></label>
+            <label for="id_image" class="form-label">Company Image*</b></label>
             {{ form.image }}
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-success">{% if create %}Create{% else %}Update{% endif %}</button>
           </div>
         </form>
+        </div>
+      </div>
+        
     </div>
 </section>
 

@@ -38,6 +38,22 @@
         </div>
         <!-- Side widgets-->
         <div class="col-lg-4">
+            {% if request.user.is_authenticated %}
+                {% if not request.user.is_vendor %}
+                <div class="card mb-4">
+                    <div class="card-header">Book Now</div>
+                    <div class="card-body">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" class="btn btn-success" value="Place booking" />
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}?next={% url 'vehicle:detail' vehicle.id %}" class="btn btn-success d-block mb-4">Login to Book Vehicle</a>
+            {% endif %}
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
@@ -60,10 +76,19 @@
                     <hr>
                     <div class="row">
                         <div class="col-sm-4">
+                            <h6 class="mb-0">Location</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            {{ vehicle.area }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-4">
                             <h6 class="mb-0">Car Type</h6>
                         </div>
                         <div class="col-sm-8 text-secondary">
-                            {{ vehicle.get_car_type_display }}
+                            {{ vehicle.car_type }}
                         </div>
                     </div>
                     <hr>
@@ -72,7 +97,7 @@
                             <h6 class="mb-0">Fuel Type</h6>
                         </div>
                         <div class="col-sm-8 text-secondary">
-                            {{ vehicle.get_fuel_type_display }}
+                            {{ vehicle.fuel_type }}
                         </div>
                     </div>
                     <hr>
@@ -90,28 +115,11 @@
                             <h6 class="mb-0">Gear Type</h6>
                         </div>
                         <div class="col-sm-8 text-secondary">
-                             {{ vehicle.get_gear_type_display }} 
+                             {{ vehicle.gear_type }} 
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            {% if request.user.is_authenticated %}
-                {% if request.user != vehicle.vendor %}
-                <div class="card mb-4">
-                    <div class="card-header">Book Now</div>
-                    <div class="card-body">
-                        <form method="post" action="">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <input type="submit" class="btn btn-success" value="Place booking" />
-                        </form>
-                    </div>
-                </div>
-                {% endif %}
-            {% else %}
-                <a href="{% url 'login' %}?next={% url 'vehicle:detail' vehicle.id %}" class="btn btn-success d-block">Login to Book Vehicle</a>
-            {% endif %}
+            </div>            
         </div>
     </div>
 </div>

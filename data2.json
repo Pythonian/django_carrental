@@ -1,0 +1,66 @@
+[
+{
+  "model": "vehicle.cartype",
+  "pk": 1,
+  "fields": {
+    "name": "Sedan",
+    "created": "2022-04-16T19:59:31.551Z"
+  }
+},
+{
+  "model": "vehicle.cartype",
+  "pk": 2,
+  "fields": {
+    "name": "Hatchback",
+    "created": "2022-04-16T19:59:40.151Z"
+  }
+},
+{
+  "model": "vehicle.cartype",
+  "pk": 3,
+  "fields": {
+    "name": "SUV",
+    "created": "2022-04-16T19:59:52.456Z"
+  }
+},
+{
+  "model": "vehicle.geartype",
+  "pk": 1,
+  "fields": {
+    "name": "Automatic",
+    "created": "2022-04-16T20:00:45.467Z"
+  }
+},
+{
+  "model": "vehicle.geartype",
+  "pk": 2,
+  "fields": {
+    "name": "Manual",
+    "created": "2022-04-16T20:00:57.676Z"
+  }
+},
+{
+  "model": "vehicle.fueltype",
+  "pk": 1,
+  "fields": {
+    "name": "Petrol",
+    "created": "2022-04-16T20:00:09.779Z"
+  }
+},
+{
+  "model": "vehicle.fueltype",
+  "pk": 2,
+  "fields": {
+    "name": "Gasoline",
+    "created": "2022-04-16T20:00:19.795Z"
+  }
+},
+{
+  "model": "vehicle.fueltype",
+  "pk": 3,
+  "fields": {
+    "name": "Diesel",
+    "created": "2022-04-16T20:00:29.386Z"
+  }
+}
+]

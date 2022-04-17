@@ -1,28 +1,22 @@
 <div class="col-lg-4 col-md-6">
     <div class="card mb-4 shadow border-0">
-        {% if vehicle.image %}
         <img src="{{ vehicle.image.url }}" class="card-img-top" height="200" alt="{{ vehicle.name }}">
-        {% endif %}
+        <div class="position-absolute text-start top-0 start-0 w-100 p-2"> <span class="badge p-2 bg-primary"><i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.area }}</span> </div>
         <div class="card-body">
             <div class="h5">&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></div>
-            <p> <i class="fa-solid fa-car"></i> {{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %} </p>
+            <p> <i class="fa-solid fa-hand-point-right"></i> <a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</a></p>
             <hr>
             <div class="mb-3 text-muted"> 
                 <span class="d-inline-block me-2"> 
                     <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
                 </span> 
                 <span class="d-inline-block me-2"> 
-                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.get_fuel_type_display }}
+                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.fuel_type }}
                 </span> 
                 <span class="d-inline-block me-2"> 
-                    <i class="fa-solid fa-gear"></i> {{ vehicle.get_gear_type_display }}
+                    <i class="fa-solid fa-gear"></i> {{ vehicle.gear_type }}
                 </span>                                
-            </div> 
-            {% if request.user == vehicle.vendor %}
-                <a class="btn btn-primary" href="{% url 'vehicle:update' vehicle.id %}">Update Vehicle</a>
-            {% else %}
-                <a href="{% url 'vehicle:detail' vehicle.id %}" class="btn btn-primary">Details</a> 
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>

@@ -18,20 +18,25 @@
                             <td>
 	                            <img src="{{ vehicle.image.url }}" style="width: 150px;" alt="{{ vehicle.name }}">
                                 <h5><a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }}</a></h5>
-                                <span>&#8358;{{ vehicle.price }} (per day)</span>
                             </td>
                             {% endfor %}
                         </tr>
                         <tr>
-                            <th>Color</th>
+                            <th>Price (per day)</th>
                             {% for vehicle in vehicles %}
-                            	<td>{{ vehicle.color }}</td>
+                            	<td>&#8358;{{ vehicle.price }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
                             <th>Color</th>
                             {% for vehicle in vehicles %}
-                            	<td>{{ vehicle.color }}</td>
+                                <td>{{ vehicle.color }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Vendor</th>
+                            {% for vehicle in vehicles %}
+                                <td>{{ vehicle.vendor.vendor_profile.company_name }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
@@ -43,19 +48,19 @@
                         <tr>
                             <th>Car Type</th>
                             {% for vehicle in vehicles %}
-                            	<td>{{ vehicle.get_car_type_display }}</td>
+                            	<td>{{ vehicle.car_type }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
                             <th>Gear Type</th>
                             {% for vehicle in vehicles %}
-                            	<td>{{ vehicle.get_gear_type_display }}</td>
+                            	<td>{{ vehicle.gear_type }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
                             <th>Fuel Type</th>
                             {% for vehicle in vehicles %}
-                            	<td>{{ vehicle.get_fuel_type_display }}</td>
+                            	<td>{{ vehicle.fuel_type }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
@@ -70,7 +75,7 @@
                 </table>
             </div>
             {% else %}
-            <div class="text-center">
+            <div class="text-center vh-100 mt-5">
                 <h4>You have not added any Vehicle to your comparison table yet.</h4>
                 <a href="{% url 'vehicle:list' %}">Browse Vehicles</a>
             </div>

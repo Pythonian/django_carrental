@@ -1,0 +1,712 @@
+[
+{
+  "model": "account.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$mRV9rA7hJ8wPuiI79ny7Tr$m1JShtGmSfB1ydWx963AZ0bPRY8wZBfumjf6qdUQcXU=",
+    "last_login": "2022-03-24T19:04:09.315Z",
+    "is_superuser": true,
+    "username": "seyi",
+    "first_name": "",
+    "last_name": "",
+    "email": "prontomaster@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2022-02-23T01:07:50.108Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$D6pSyJ5EhYy5d8YxmzMTTu$pnvOeSIZCovMoajgA+qLr2X2IA3AwroVbX3yjKOi0+w=",
+    "last_login": "2022-03-06T10:17:06.733Z",
+    "is_superuser": false,
+    "username": "israel",
+    "first_name": "",
+    "last_name": "",
+    "email": "israel@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T10:17:05.157Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$dWEmV2ZIuHFkrLcHeSXNYa$aw8luZSo1NKN3pYKaTb9129wdbn0QwzfbrdSzIGSsZQ=",
+    "last_login": "2022-03-16T15:52:34.561Z",
+    "is_superuser": false,
+    "username": "mercy",
+    "first_name": "",
+    "last_name": "",
+    "email": "mercy@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T10:20:54.867Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$lnEJGgejP8G6Dhr2CSlAR8$x9SVi7pJF+5tjcredMy1cgJEnkq22HuOlhlegm6/pf8=",
+    "last_login": "2022-03-06T10:31:54.299Z",
+    "is_superuser": false,
+    "username": "naza",
+    "first_name": "",
+    "last_name": "",
+    "email": "naza@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T10:31:52.883Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$hq65xg0pkPXMmvUmkN6oCY$g2u+kSzDAG+viDobR+rtzM6omSofJV9z4TxOFrcVBaU=",
+    "last_login": "2022-03-06T13:04:39.083Z",
+    "is_superuser": false,
+    "username": "chibyk",
+    "first_name": "",
+    "last_name": "",
+    "email": "chibyk@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T13:04:38.481Z",
+    "is_vendor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$M4NUfGmkkzhtfZqgKwgdiF$+vkR1CfcWV/6ZeNtvCBsqeGUTN7IKxDsTWRH7yuilus=",
+    "last_login": "2022-03-06T13:22:31.016Z",
+    "is_superuser": false,
+    "username": "sayo",
+    "first_name": "",
+    "last_name": "",
+    "email": "sayo@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T13:22:29.802Z",
+    "is_vendor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$rxei4hFS4yMEc7medSvJHa$7+eueeMUnRtEPe3gKiQ75nZP0EX7FkgDqP/b2CAArLg=",
+    "last_login": "2022-03-06T13:42:33.047Z",
+    "is_superuser": false,
+    "username": "ugochi",
+    "first_name": "",
+    "last_name": "",
+    "email": "ugochi@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T13:42:32.508Z",
+    "is_vendor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$6L4ZCOhGb9Rk9R0O5n3dQb$VloHEarp5fibjkgLOIxveEVJ4Y7x1baiyM7si4zZu+4=",
+    "last_login": "2022-03-06T13:44:41.816Z",
+    "is_superuser": false,
+    "username": "darling",
+    "first_name": "",
+    "last_name": "",
+    "email": "darling@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-06T13:44:39.301Z",
+    "is_vendor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 19,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$agumLRFXAvwy1AR3ZZN1Kx$cB+niE1avCMxA1HO02CBmFXG9mEZ4YAwQtZY/Qqu1Zw=",
+    "last_login": "2022-03-10T10:10:12.611Z",
+    "is_superuser": false,
+    "username": "ebuka",
+    "first_name": "",
+    "last_name": "",
+    "email": "ebuka@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-10T10:10:12.022Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$4z6GfGGJJ9fbTaSHI1IHKN$C++ZtOWhthnpr+tmooaycV/PeO9iUgrf2BnZYjctyWM=",
+    "last_login": "2022-04-02T13:09:11.199Z",
+    "is_superuser": false,
+    "username": "james",
+    "first_name": "",
+    "last_name": "",
+    "email": "james@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-10T10:11:26.774Z",
+    "is_vendor": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$D90rOVBATMb4K1qOgjxn2m$ejFuO+wtDvebnaPa7+lc+IHMG9vOIotoJgYdO9tbrGk=",
+    "last_login": "2022-03-10T10:34:20.133Z",
+    "is_superuser": false,
+    "username": "gabby",
+    "first_name": "",
+    "last_name": "",
+    "email": "gabby@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-10T10:34:19.593Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 22,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$vaKSM3lydNDcrnzxW34ZR1$AchV8de1c03eVZCFl59p1kWk3SfVA+2MX8otPlE+7RI=",
+    "last_login": "2022-03-16T21:03:27.140Z",
+    "is_superuser": false,
+    "username": "tosin",
+    "first_name": "",
+    "last_name": "",
+    "email": "tosin@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-16T21:03:26.528Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$yMOOLKtkhNZFnI6NZF9uk9$8W8e1RMzJcFHwM2xTQxsmfILMmmex65UBmcTAgpzXkA=",
+    "last_login": "2022-03-22T13:01:49.787Z",
+    "is_superuser": false,
+    "username": "olisa",
+    "first_name": "",
+    "last_name": "",
+    "email": "olisa@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-22T13:01:49.090Z",
+    "is_vendor": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "account.vendorprofile",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "company_name": "Novelty Media",
+    "address": "23 Sholabomi Crescent Off Oladimeji Street",
+    "about": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "phone_number": "07062299016",
+    "city": "Lagos",
+    "state": "Virginia",
+    "image": "vendor/images/100x100_img5.jpg"
+  }
+},
+{
+  "model": "account.vendorprofile",
+  "pk": 14,
+  "fields": {
+    "user": 13,
+    "company_name": "Mercy Vendors",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "about": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "phone_number": "07062299016",
+    "city": "Iju",
+    "state": "Lagos",
+    "image": "vendor/images/122x34_img1.jpg"
+  }
+},
+{
+  "model": "account.vendorprofile",
+  "pk": 15,
+  "fields": {
+    "user": 14,
+    "company_name": "Naza Rentals",
+    "address": "123 University road, UNN",
+    "about": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "phone_number": "09202938291",
+    "city": "Nsukka",
+    "state": "Enugu",
+    "image": "vendor/images/145x49_img6.jpg"
+  }
+},
+{
+  "model": "account.vendorprofile",
+  "pk": 17,
+  "fields": {
+    "user": 22,
+    "company_name": "Tosin rentals",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "about": "Hey there",
+    "phone_number": "07062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "image": "vendor/images/brand1.png"
+  }
+},
+{
+  "model": "account.vendorprofile",
+  "pk": 18,
+  "fields": {
+    "user": 23,
+    "company_name": "Footystory",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "about": "This is description",
+    "phone_number": "07062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "image": "vendor/images/brand1_hqRykn2.png"
+  }
+},
+{
+  "model": "account.customerprofile",
+  "pk": 1,
+  "fields": {
+    "user": 15,
+    "phone_number": "07062299016",
+    "city": "Surulere",
+    "state": "Lagos",
+    "government_id": "identification/work.txt",
+    "image": "customer/images/5.todo_notebook_notes.png",
+    "address": "23 Sholabomi Crescent Off Oladimeji Street",
+    "license": "license/django-react.png",
+    "verified": false
+  }
+},
+{
+  "model": "account.customerprofile",
+  "pk": 2,
+  "fields": {
+    "user": 16,
+    "phone_number": "+2347062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "government_id": "identification/5.todo_notebook_notes.png",
+    "image": "customer/images/5.todo_notebook_notes_fksb57W.png",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "license": "license/bright-uml.png",
+    "verified": false
+  }
+},
+{
+  "model": "account.customerprofile",
+  "pk": 3,
+  "fields": {
+    "user": 17,
+    "phone_number": "+2347062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "government_id": "identification/course-reg.png",
+    "image": "customer/images/carrental-uml.png",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "license": "license/a0a0560923478f8cb64265d229e253f7.jpg",
+    "verified": false
+  }
+},
+{
+  "model": "account.customerprofile",
+  "pk": 4,
+  "fields": {
+    "user": 18,
+    "phone_number": "+2347062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "government_id": "identification/bright-uml.png",
+    "image": "customer/images/crowdfund-flow.png",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "license": "license/carrental-uml.png",
+    "verified": true
+  }
+},
+{
+  "model": "account.customerprofile",
+  "pk": 5,
+  "fields": {
+    "user": 20,
+    "phone_number": "+2347062299016",
+    "city": "Lagos",
+    "state": "Lagos",
+    "government_id": "identification/12_Skills_Programmer_CVb.jpg",
+    "image": "customer/images/bright-uml.png",
+    "address": "14 Ogunbusola str. Iju Ishaga",
+    "license": "license/220x330.jpg",
+    "verified": true
+  }
+},
+{
+  "model": "vehicle.area",
+  "pk": 1,
+  "fields": {
+    "city": "Lagos",
+    "created": "2022-03-04T21:28:20.791Z"
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 1,
+  "fields": {
+    "vendor": 1,
+    "name": "American Muscle",
+    "model": "C60",
+    "color": "Gray",
+    "no_of_seats": 4,
+    "description": "Working with Start Bootstrap templates has saved me tons of development time when building new projects! Starting with a Bootstrap template just makes things easier.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "G",
+    "price": "500.00",
+    "image": "vehicle/750x430_img10.jpg",
+    "is_available": true,
+    "license_plate": "KIJ-323-ABC",
+    "area": 1,
+    "created": "2022-03-04T21:28:27.348Z",
+    "updated": "2022-03-05T13:52:12.450Z",
+    "compares": []
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 2,
+  "fields": {
+    "vendor": 1,
+    "name": "Mercedes Maybach",
+    "model": "V8",
+    "color": "White",
+    "no_of_seats": 4,
+    "description": "Working with Start Bootstrap templates has saved me tons of development time when building new projects! Starting with a Bootstrap template just makes things easier.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "P",
+    "price": "2000.00",
+    "image": "vehicle/750x430_img7.jpg",
+    "is_available": true,
+    "license_plate": "MIJ-223-MAY",
+    "area": 1,
+    "created": "2022-03-04T21:29:15.187Z",
+    "updated": "2022-03-05T14:00:00.804Z",
+    "compares": []
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 3,
+  "fields": {
+    "vendor": 1,
+    "name": "Nissan",
+    "model": "Avantador",
+    "color": "Yellow",
+    "no_of_seats": 5,
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, odio laborum, fuga, accusamus ullam perspiciatis ex facilis maiores explicabo possimus vitae! Corrupti doloribus possimus sed rerum vero fuga est similique.\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit error facilis placeat cumque, accusantium hic, sint, magnam maiores unde eveniet tempore totam consequuntur asperiores. Minima laborum sint natus cum tempore! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex, repellendus expedita quis hic optio ad quidem praesentium totam labore necessitatibus repudiandae, sapiente, consequatur rem fugiat quibusdam asperiores consequuntur veritatis aperiam.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "P",
+    "price": "2300.00",
+    "image": "vehicle/750x430_img12.jpg",
+    "is_available": false,
+    "license_plate": "XYZ-877",
+    "area": 1,
+    "created": "2022-03-05T10:26:26.774Z",
+    "updated": "2022-03-05T10:26:26.774Z",
+    "compares": []
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 4,
+  "fields": {
+    "vendor": 1,
+    "name": "Lamborghini",
+    "model": "F8",
+    "color": "Red",
+    "no_of_seats": 3,
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, odio laborum, fuga, accusamus ullam perspiciatis ex facilis maiores explicabo possimus vitae! Corrupti doloribus possimus sed rerum vero fuga est similique.\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit error facilis placeat cumque, accusantium hic, sint, magnam maiores unde eveniet tempore totam consequuntur asperiores. Minima laborum sint natus cum tempore! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex, repellendus expedita quis hic optio ad quidem praesentium totam labore necessitatibus repudiandae, sapiente, consequatur rem fugiat quibusdam asperiores consequuntur veritatis aperiam.",
+    "car_type": "SE",
+    "gear_type": "A",
+    "fuel_type": "G",
+    "price": "2000.00",
+    "image": "vehicle/750x430_img14.jpg",
+    "is_available": true,
+    "license_plate": "BCV-892-YYY",
+    "area": 1,
+    "created": "2022-03-05T13:53:55.057Z",
+    "updated": "2022-03-05T13:53:55.057Z",
+    "compares": []
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 5,
+  "fields": {
+    "vendor": 1,
+    "name": "Toyota Camry",
+    "model": "2020",
+    "color": "Red",
+    "no_of_seats": 4,
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, odio laborum, fuga, accusamus ullam perspiciatis ex facilis maiores explicabo possimus vitae! Corrupti doloribus possimus sed rerum vero fuga est similique.\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit error facilis placeat cumque, accusantium hic, sint, magnam maiores unde eveniet tempore totam consequuntur asperiores. Minima laborum sint natus cum tempore! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex, repellendus expedita quis hic optio ad quidem praesentium totam labore necessitatibus repudiandae, sapiente, consequatur rem fugiat quibusdam asperiores consequuntur veritatis aperiam.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "P",
+    "price": "2500.00",
+    "image": "vehicle/750x430_img9.jpg",
+    "is_available": true,
+    "license_plate": "HGB-777",
+    "area": 1,
+    "created": "2022-03-05T13:56:57.372Z",
+    "updated": "2022-03-10T10:04:30.192Z",
+    "compares": []
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 6,
+  "fields": {
+    "vendor": 1,
+    "name": "Mitsubushi",
+    "model": "M6-V",
+    "color": "Black",
+    "no_of_seats": 4,
+    "description": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "G",
+    "price": "2000.00",
+    "image": "vehicle/750x430_img15.jpg",
+    "is_available": true,
+    "license_plate": "LXZ-7U8",
+    "area": 1,
+    "created": "2022-03-06T10:07:54.522Z",
+    "updated": "2022-03-06T10:12:27.272Z",
+    "compares": [
+      18
+    ]
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 7,
+  "fields": {
+    "vendor": 13,
+    "name": "Toyota Hiace",
+    "model": "H8",
+    "color": "White",
+    "no_of_seats": 24,
+    "description": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "car_type": "HB",
+    "gear_type": "A",
+    "fuel_type": "D",
+    "price": "3000.00",
+    "image": "vehicle/750x430_img11.jpg",
+    "is_available": true,
+    "license_plate": "JSH-KOL",
+    "area": 1,
+    "created": "2022-03-06T10:22:40.488Z",
+    "updated": "2022-03-10T04:12:25.165Z",
+    "compares": [
+      20
+    ]
+  }
+},
+{
+  "model": "vehicle.vehicle",
+  "pk": 8,
+  "fields": {
+    "vendor": 14,
+    "name": "Mercedes Benz",
+    "model": "V-boot",
+    "color": "Red",
+    "no_of_seats": 4,
+    "description": "In pede mi, aliquet sit amet, euismod in,auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem.",
+    "car_type": "SU",
+    "gear_type": "A",
+    "fuel_type": "D",
+    "price": "1300.00",
+    "image": "vehicle/750x430_img12_qarmwwk.jpg",
+    "is_available": true,
+    "license_plate": "JSN-321",
+    "area": 1,
+    "created": "2022-03-06T10:33:55.780Z",
+    "updated": "2022-03-06T10:33:55.780Z",
+    "compares": [
+      13,
+      22
+    ]
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 1,
+  "fields": {
+    "date_of_booking": "2022-03-07",
+    "date_of_return": "2022-03-18",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 7,
+    "customer": 18,
+    "created": "2022-03-06T15:40:12.794Z",
+    "updated": "2022-03-06T15:40:12.794Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 2,
+  "fields": {
+    "date_of_booking": "2022-03-07",
+    "date_of_return": "2022-03-30",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 7,
+    "customer": 18,
+    "created": "2022-03-06T16:01:24.608Z",
+    "updated": "2022-03-06T16:01:24.608Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 3,
+  "fields": {
+    "date_of_booking": "2022-03-10",
+    "date_of_return": "2022-03-24",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 7,
+    "customer": 1,
+    "created": "2022-03-09T21:47:27.312Z",
+    "updated": "2022-03-09T21:47:27.312Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 4,
+  "fields": {
+    "date_of_booking": "2022-03-11",
+    "date_of_return": "2022-03-24",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 5,
+    "customer": 20,
+    "created": "2022-03-10T10:18:05.111Z",
+    "updated": "2022-03-10T10:18:05.111Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 5,
+  "fields": {
+    "date_of_booking": "2022-03-18",
+    "date_of_return": "2022-03-08",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 6,
+    "customer": 20,
+    "created": "2022-03-10T13:31:46.541Z",
+    "updated": "2022-03-10T13:31:46.541Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 6,
+  "fields": {
+    "date_of_booking": "2022-03-18",
+    "date_of_return": "2022-03-30",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 6,
+    "customer": 20,
+    "created": "2022-03-10T13:32:05.816Z",
+    "updated": "2022-03-10T13:32:05.816Z"
+  }
+},
+{
+  "model": "vehicle.rent",
+  "pk": 7,
+  "fields": {
+    "date_of_booking": "2022-03-02",
+    "date_of_return": "2022-03-09",
+    "advance_amount": null,
+    "total_amount": null,
+    "is_available": true,
+    "is_bill_paid": false,
+    "request_status": "P",
+    "vehicle": 1,
+    "customer": 20,
+    "created": "2022-03-10T16:19:23.023Z",
+    "updated": "2022-03-10T16:19:23.023Z"
+  }
+}
+]

@@ -4,6 +4,30 @@ from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
 
+class CarType(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class GearType(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class FuelType(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Area(models.Model):
     city = models.CharField(max_length=20)
     created = models.DateTimeField(auto_now_add=True)
@@ -13,28 +37,6 @@ class Area(models.Model):
 
 
 class Vehicle(models.Model):
-    SEDAN = 'SE'
-    HATCHBACK = 'HB'
-    SUV = 'SU'
-    CAR_TYPE_CHOICES = (
-        (SEDAN, 'Sedan'),
-        (HATCHBACK, 'Hatchback'),
-        (SUV, 'SUV'),)
-
-    AUTOMATIC = 'A'
-    MANUAL = 'M'
-    GEAR_TYPE_CHOICES = (
-        (AUTOMATIC, 'Automatic'),
-        (MANUAL, 'Manual'),)
-
-    PETROL = 'P'
-    GASOLINE = 'G'
-    DIESEL = 'D'
-    FUEL_TYPE_CHOICES = (
-        (PETROL, 'Petrol'),
-        (GASOLINE, 'Gasoline'),
-        (DIESEL, 'Diesel'),)
-
     vendor = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='vendor')
     name = models.CharField(max_length=60)
@@ -42,14 +44,20 @@ class Vehicle(models.Model):
     color = models.CharField(max_length=20)
     no_of_seats = models.IntegerField()
     description = models.TextField(max_length=5000)
-    car_type = models.CharField(max_length=2, choices=CAR_TYPE_CHOICES)
-    gear_type = models.CharField(max_length=1, choices=GEAR_TYPE_CHOICES)
-    fuel_type = models.CharField(max_length=1, choices=FUEL_TYPE_CHOICES)
+    car_type = models.ForeignKey(
+        CarType, on_delete=models.PROTECT,
+        blank=True, null=True)
+    gear_type = models.ForeignKey(
+        GearType, on_delete=models.PROTECT,
+        blank=True, null=True)
+    fuel_type = models.ForeignKey(
+        FuelType, on_delete=models.PROTECT,
+        blank=True, null=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='vehicle')
     is_available = models.BooleanField(default=True)
     license_plate = models.CharField(max_length=20, unique=True)
-    area = models.ForeignKey(Area, on_delete=models.CASCADE)
+    area = models.ForeignKey(Area, on_delete=models.PROTECT)
     compares = models.ManyToManyField(
         User, related_name='compare', blank=True, default=None)
     created = models.DateTimeField(auto_now_add=True)
@@ -94,7 +102,7 @@ class Rent(models.Model):
         ordering = ['created']
 
     def __str__(self):
-        return f"{self.customer.name} - {self.vehicle.name}"
+        return f"{self.vehicle.name}"
 
     @property
     def total_days(self):

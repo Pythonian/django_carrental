@@ -2,12 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from carrental.utils import mk_paginator
 from account.models import VendorProfile
 from .models import Vehicle, Rent
 from .forms import VehicleForm, RentForm
-
-
 
 
 def vendor_list(request):
@@ -18,13 +17,8 @@ def vendor_list(request):
 
 
 def vehicle_list(request):
-    if request.user.is_authenticated:
-        vehicles = Vehicle.objects.filter(
-            is_available=True).exclude(vendor=request.user)
-    else:
-        vehicles = Vehicle.objects.filter(
-            is_available=True)
-    vehicles = mk_paginator(request, vehicles, 3)
+    vehicles = Vehicle.objects.filter(is_available=True)
+    vehicles = mk_paginator(request, vehicles, 9)
 
     return render(
         request, 'vehicle/list.html', {'vehicles': vehicles})
@@ -44,6 +38,9 @@ def vehicle_detail(request, pk):
             rent.save()
             request.session['rent_id'] = rent.id
             return redirect('vehicle:confirm_booking')
+        else:
+            messages.warning(
+                request, "Your selected dates are incorrect. Try again")
     else:
         form = RentForm()
 
@@ -63,6 +60,7 @@ def confirm_booking(request):
         {'rent': rent})
 
 
+@login_required
 def rented_vehicles(request):
     vehicles = Rent.objects.filter(customer=request.user)
 
@@ -94,6 +92,11 @@ def compare_vehicles(request):
 
 @login_required
 def vehicle_create(request):
+    if not request.user.is_vendor:
+        messages.info(
+            request, "Login as a vendor to upload vehicle.")
+        logout(request)
+        return redirect('login')
     if request.method == 'POST':
         form = VehicleForm(request.POST, request.FILES)
         if form.is_valid():
@@ -113,8 +116,9 @@ def vehicle_create(request):
         request, 'vehicle/form.html', {'form': form, 'create': True})
 
 
+@login_required
 def vehicle_update(request, pk):
-    vehicle = get_object_or_404(Vehicle, id=pk)
+    vehicle = get_object_or_404(Vehicle, id=pk, vendor=request.user)
     if request.method == 'POST':
         form = VehicleForm(request.POST, request.FILES, instance=vehicle)
         if form.is_valid():
@@ -133,8 +137,9 @@ def vehicle_update(request, pk):
                   {'form': form, 'create': False, 'vehicle': vehicle})
 
 
+@login_required
 def vehicle_delete(request, pk):
-    vehicle = get_object_or_404(Vehicle, id=pk)
+    vehicle = get_object_or_404(Vehicle, id=pk, vendor=request.user)
     if request.method == 'POST':
         vehicle.delete()
         messages.success(request, 'Vehicle successfully deleted')
@@ -145,83 +150,83 @@ def vehicle_delete(request, pk):
                   {'vehicle': vehicle})
 
 
-def check_availability(request, license_plate):
-    import datetime
+# def check_availability(request, license_plate):
+#     import datetime
 
-    date_of_booking = request.POST.get(
-        'date_of_booking', '')
-    date_of_return = request.POST.get(
-        'date_of_return', '')
+#     date_of_booking = request.POST.get(
+#         'date_of_booking', '')
+#     date_of_return = request.POST.get(
+#         'date_of_return', '')
 
-    date_of_booking = datetime.strptime(
-        date_of_booking, '%Y-%m-%d').date()
-    date_of_return = datetime.strptime(
-        date_of_return, '%Y-%m-%d').date()
+#     date_of_booking = datetime.strptime(
+#         date_of_booking, '%Y-%m-%d').date()
+#     date_of_return = datetime.strptime(
+#         date_of_return, '%Y-%m-%d').date()
 
-    rentvehicle = Rent.objects.filter(
-        license_plate=license_plate)
-    vehicle = Vehicle.objects.get(
-        license_plate=license_plate)
+#     rentvehicle = Rent.objects.filter(
+#         license_plate=license_plate)
+#     vehicle = Vehicle.objects.get(
+#         license_plate=license_plate)
 
-    customer_email = request.session.get('user_email')
-    customer = Customer.objects.get(
-        customer_email=customer_email)
+#     customer_email = request.session.get('user_email')
+#     customer = Customer.objects.get(
+#         customer_email=customer_email)
 
-    if date_of_booking < datetime.date.today():
-        Incorrect_dates = "Please give proper dates"
-        return render(
-            request, 'showdetails.html',
-            {'Incorrect_dates': Incorrect_dates,
-             'vehicle': vehicle, 'customer': customer})
+#     if date_of_booking < datetime.date.today():
+#         Incorrect_dates = "Please give proper dates"
+#         return render(
+#             request, 'showdetails.html',
+#             {'Incorrect_dates': Incorrect_dates,
+#              'vehicle': vehicle, 'customer': customer})
 
-    if date_of_return < date_of_booking:
-        Incorrect_dates = "Please give proper dates"
-        return render(
-            request, 'showdetails_loggedin.html',
-            {'Incorrect_dates': Incorrect_dates,
-             'vehicle': vehicle, 'customer': customer})
+#     if date_of_return < date_of_booking:
+#         Incorrect_dates = "Please give proper dates"
+#         return render(
+#             request, 'showdetails_loggedin.html',
+#             {'Incorrect_dates': Incorrect_dates,
+#              'vehicle': vehicle, 'customer': customer})
 
-    days = (date_of_return - date_of_booking).days + 1
-    total = days * vehicle.price
+#     days = (date_of_return - date_of_booking).days + 1
+#     total = days * vehicle.price
 
-    rent_data = {
-        "date_of_booking": date_of_booking,
-        "date_of_return": date_of_return,
-        "days": days, "total": total
-    }
+#     rent_data = {
+#         "date_of_booking": date_of_booking,
+#         "date_of_return": date_of_return,
+#         "days": days, "total": total
+#     }
 
-    for rv in rentvehicle:
-        if (rv.date_of_booking >= date_of_booking and date_of_return >= rv.date_of_booking) or (date_of_booking >= rv.date_of_booking and date_of_return <= rv.date_of_return) or (date_of_booking <= rv.date_of_return and date_of_return >= rv.date_of_return):
-            if rv.isAvailable:
-                Available = True
-                Message = "Someone has requested for this vehicle from " + \
-                    str(rv.RentVehicle_Date_of_Booking) + \
-                    " to " + str(rv.RentVehicle_Date_of_Return)
-                return render(
-                    request,
-                    'showdetails.html',
-                    {'Message': Message,
-                     'Available': Available,
-                     'vehicle': vehicle,
-                     'customer': customer,
-                     'rent_data': rent_data})
+#     for rv in rentvehicle:
+#         if (rv.date_of_booking >= date_of_booking and date_of_return >= rv.date_of_booking) or (date_of_booking >= rv.date_of_booking and date_of_return <= rv.date_of_return) or (date_of_booking <= rv.date_of_return and date_of_return >= rv.date_of_return):
+#             if rv.isAvailable:
+#                 Available = True
+#                 Message = "Someone has requested for this vehicle from " + \
+#                     str(rv.RentVehicle_Date_of_Booking) + \
+#                     " to " + str(rv.RentVehicle_Date_of_Return)
+#                 return render(
+#                     request,
+#                     'showdetails.html',
+#                     {'Message': Message,
+#                      'Available': Available,
+#                      'vehicle': vehicle,
+#                      'customer': customer,
+#                      'rent_data': rent_data})
 
-            NotAvailable = True
-            return render(
-                request,
-                'showdetails.html',
-                {'NotAvailable': NotAvailable,
-                 'dates': rv,
-                 'vehicle': vehicle,
-                 'customer': customer})
+#             NotAvailable = True
+#             return render(
+#                 request,
+#                 'showdetails.html',
+#                 {'NotAvailable': NotAvailable,
+#                  'dates': rv,
+#                  'vehicle': vehicle,
+#                  'customer': customer})
 
-        # if (RentVehicle_Date_of_Booking < rv.RentVehicle_Date_of_Booking and RentVehicle_Date_of_Return < rv.RentVehicle_Date_of_Booking) or (RentVehicle_Date_of_Booking > rv.RentVehicle_Date_of_Return and RentVehicle_Date_of_Return > rv.RentVehicle_Date_of_Return):
-        #     Available = True
-        #     return render(request,'showdetails_loggedin.html',{'Available':Available,'vehicle':vehicle,'customer':customer,'rent_data':rent_data})
+#         # if (RentVehicle_Date_of_Booking < rv.RentVehicle_Date_of_Booking and RentVehicle_Date_of_Return < rv.RentVehicle_Date_of_Booking) or (RentVehicle_Date_of_Booking > rv.RentVehicle_Date_of_Return and RentVehicle_Date_of_Return > rv.RentVehicle_Date_of_Return):
+#         #     Available = True
+#         #     return render(request,'showdetails_loggedin.html',{'Available':Available,'vehicle':vehicle,'customer':customer,'rent_data':rent_data})
 
-    Available = True
+#     Available = True
 
-    return render(
-        request, 'showdetails.html',
-        {'Available': Available, 'vehicle': vehicle,
-         'customer': customer, 'rent_data': rent_data})
+#     return render(
+#         request, 'showdetails.html',
+#         {'Available': Available, 'vehicle': vehicle,
+#          'customer': customer, 'rent_data': rent_data})

@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from .models import User
 from . import verify
 from vehicle.models import Vehicle
@@ -12,10 +13,11 @@ from .forms import (
     CustomerProfileForm, VerifyForm)
 
 
-class VendorSignUpView(CreateView):
+class VendorSignUpView(SuccessMessageMixin, CreateView):
     model = User
     form_class = VendorSignUpForm
     template_name = 'registration/signup.html'
+    success_message = "Your registration was successful."
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'a vendor'

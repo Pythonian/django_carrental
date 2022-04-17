@@ -1,33 +1,12 @@
 <div class="col-lg-4 mb-5">
     <div class="card h-100 shadow border-0">
         <div class="card-body text-center">
-            <div>
-                
-                <img class="mb-2" src="{% if vendor.image %}{{ vendor.image.url }}{% else %}https://via.placeholder.com/50x50{% endif %}"  class="mb-2"alt="{{ vendor.company_name }}">
-
-                
-                <a class="text-decoration-none link-dark stretched-link" href="">
-                    <h5>{{ vendor.company_name }}</h5>
-                </a>
-                <p class="text-muted mb-0">{{ vendor.address }}</p>
-            </div>
-            <p class="mt-2 card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-            <!-- <div class="border-top pt-3">
-                <div class="row">
-                    <div class="col-4">
-                        <h6>3422</h6>
-                        <p>Cars</p>
-                    </div>
-                    <div class="col-4">
-                        <h6>{{ vendor.state }}</h6>
-                        <p>Area</p>
-                    </div>
-                    <div class="col-4">
-                        <h6>3422</h6>
-                        <p>Post</p>
-                    </div>
-                </div>
-            </div> -->
+            {% if vendor.image %}
+            <img class="mb-2" src="{{ vendor.image.url }}" class="mb-2" alt="{{ vendor.company_name }}">
+            {% endif %}
+            <h5>{{ vendor.company_name }}</h5>
+            <p class="text-muted">{{ vendor.address }}</p>
+            <a href="{% url 'vendor_profile' vendor.user.username %}" class="btn btn-primary">View profile</a>
         </div>
     </div>
 </div>

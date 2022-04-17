@@ -24,6 +24,10 @@ def home(request):
 
 def search(request):
     qs = Vehicle.objects.all()
+    gear_types = GearType.objects.all()
+    car_types = CarType.objects.all()
+    fuel_types = FuelType.objects.all()
+    areas = Area.objects.all()
 
     car_name_query = request.GET.get('car_name')
     min_price_query = request.GET.get('min_price')
@@ -55,7 +59,9 @@ def search(request):
         qs = qs.filter(fuel_type=fuel_type_query)
 
     context = {
-        'vehicles': qs
+        'vehicles': qs,
+        'gear_types': gear_types, 'car_types': car_types,
+        'fuel_types': fuel_types, 'areas': areas
     }
 
     return render(

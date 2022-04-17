@@ -6,7 +6,7 @@ from .models import User
 from . import verify
 from vehicle.models import Vehicle
 from carrental.utils import mk_paginator
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import CreateView
 from .forms import (
     VendorSignUpForm, CustomerSignUpForm, VendorProfileForm,
@@ -29,9 +29,33 @@ class VendorSignUpView(SuccessMessageMixin, CreateView):
         return redirect('vendor_create_profile')
 
 
-@login_required
-def vendor_profile(request):
-    return render(request, 'vendor/profile.html', {})
+# def vendor_profile(request, username):
+#     user = get_object_or_404(
+#         User, username=username)
+#     products = Product.objects.filter(
+#         vendor=user)
+#     product_count = products.count()
+#     products = mk_paginator(request, products, 4)
+
+#     template = 'vendor/profile.html'
+#     context = {
+#         'user': user,
+#         "products": products,
+#         "product_count": product_count,
+#     }
+
+#     return render(request, template, context)
+
+
+def vendor_profile(request, username):
+    user = get_object_or_404(
+        User, username=username)
+    vehicles = Vehicle.objects.filter(
+        vendor=user)
+    vehicles = mk_paginator(request, vehicles, 6)
+    return render(
+        request, 'vendor/profile.html',
+        {'vehicles': vehicles, 'user': user})
 
 
 @login_required

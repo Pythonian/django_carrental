@@ -7,7 +7,59 @@
 <section class="py-5 bg-dark">
     <div class="container px-5 my-5">
         <div class="text-center mb-5 text-white">
-            <h1 class="fw-bolder">Search Results</h1>
+            <h1 class="fw-bolder mb-3">Search Results</h1>
+            <form action="{% url 'search' %}" method="get">
+                <div class="row">
+                    <div class="col-lg-4 form-group mb-3">
+                        <input class="form-control form-control-lg" id="name" type="text" placeholder="Enter car name" name="car_name" value="{{ request.GET.car_name }}" />
+                    </div>
+                    <div class="col-lg-4 form-group mb-3">
+                        <input class="form-control form-control-lg" id="min_price" type="number" placeholder="Enter min price" name="min_price" value="{{ request.GET.min_price }}" />
+                    </div>
+                    <div class="col-lg-4 form-group mb-3">
+                        <input class="form-control form-control-lg" id="max_price" type="number" placeholder="Enter max price" name="max_price" value="{{ request.GET.max_price }}" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-3 form-group mb-3">
+                        <select name="gear_type" class="form-select form-control-lg" id="id_gear_type" value="{{ request.GET.gear_type }}">
+                            <option value="" selected>--Gear Type--</option>
+                            {% for gear_type in gear_types %}
+                            <option value="{{ gear_type.pk }}">{{ gear_type.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-3 form-group mb-3">
+                        <select name="car_type" class="form-select form-control-lg" id="id_car_type">
+                            <option value="" selected>--Car Type--</option>
+                            {% for car_type in car_types %}
+                            <option value="{{ car_type.pk }}">{{ car_type.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-3 form-group mb-3">
+                        <select name="fuel_type" class="form-select form-control-lg" id="id_fuel_type">
+                            <option value="" selected>--Fuel Type--</option>
+                            {% for fuel_type in fuel_types %}
+                            <option value="{{ fuel_type.pk }}">{{ fuel_type.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-3 form-group mb-3">
+                        <select name="area" class="form-select form-control-lg" id="id_area">
+                            <option value="" selected>--Area--</option>
+                            {% for area in areas %}
+                            <option value="{{ area.pk }}">{{ area.city }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
         </div>
     </div>
 </section>

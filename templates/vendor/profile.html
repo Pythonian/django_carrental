@@ -1,77 +1,61 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}{{ user.vendor_profile.company_name }} Profile{% endblock %}
 
 {% block content %}
 
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <aside class="col-lg-3">
-                <div class="card p-3 h-100">
-                    <nav class="nav flex-column nav-pills"> 
-                    	<a class="nav-link active" href="{# url 'profile' #}">My Profile</a>
-                    	<a class="nav-link" href="#">My Stories</a>
-                    	<a class="nav-link" href="{% url 'logout' %}">Log out</a> 
-                    </nav>
-                </div>
-            </aside>
-            <div class="col-lg-9">
-                {% include 'partials/_alerts.html' %}
-                <div class="card mb-4">
-                    <div class="card-body">
-                    	<header class="d-md-flex">
-                            <div class="flex-shrink-0">
-                                <img class="rounded-circle" src="https://via.placeholder.com/50x50" alt="Sample Image">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h5 class="m-0">{{ request.user.username|title }}</h5>
-                                <small class="text-italics">Registered {{ request.user.date_joined }}</small>
-                            </div>
-                            <div> 
-                                <a href="#" class="btn btn-sm btn-outline-primary">Edit Profile</a>
-                            </div>
-                        </header>
-                    </div>
-                </div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card bg-light">
+                <article class="p-4 text-center">
+                    {% if user.vendor_profile.image %}
+                    <img src="{{ user.vendor_profile.image.url }}">
+                    {% endif %}
+                    <h4 class="card-title mt-3">{{ user.vendor_profile.company_name }}</h4>
+                    <p>{{ user.vendor_profile.about }}</p>
+                    <hr>
+                    <p class="text-muted"> <i class="fa-solid fa-map-marker-alt"></i> {{ user.vendor_profile.address }}, {{ user.vendor_profile.city }}, {{ user.vendor_profile.state }}
+                    </p>
+                    <hr>
+                    <a href="mailto:{{ user.email }}" class="btn btn-warning"><i class="fa-solid fa-envelope"></i> Send mail </a> 
+                    <a href="tel:{{ user.vendor_profile.phone_number }}" class="btn btn-success"> <i class="fa fa-phone"></i> Make a call </a> 
+                </article>
+            </div>
+        </div>
+        
+        <main class="col-lg-8">
+            <div class="row">
                 {% for vehicle in vehicles %}
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <img src="{{ vehicle.cover.url }}" height="330" width="220" class="" alt="{{ vehicle.title }}">
-                            </div>
-                            <div class="flex-grow-1 ms-3 p-3">
-                                <a href="{# url 'vehicle_detail' vehicle.id #}" class="h5 mb-1 title">{{ vehicle.title }}</a>
-                                <p class="mb-3 text-muted">{{ vehicle.author }}</p>
-                                <div class="mb-3">{{ vehicle.summary|linebreaks }}</div>
-                                <div class="row row-cols-auto gx-2 gy-3 align-items-center">
-                                    {% if request.user.is_authenticated %}
-                                    <div>
-                                        {% if favorite %}
-                                            <a href="{% url 'add_to_library' vehicle.id %}" class="btn  btn-warning">Remove from library</a> 
-                                        {% else %}
-                                            <a href="{% url 'add_to_library' vehicle.id %}" class="btn  btn-success">Add to library</a>
-                                        {% endif %}
-                                    </div>
-                                    {% endif %}
-                                     
-                                    <div> 
-                                        <a href="" target="_blank" class="btn  btn-info"> Read now </a>
-                                    </div>
-                                </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4 shadow border-0">
+                        <img src="{{ vehicle.image.url }}" class="card-img-top" height="200" alt="{{ vehicle.name }}">
+                        <div class="position-absolute text-start top-0 start-0 w-100 p-2"> <span class="badge p-2 bg-primary"><i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.area }}</span> </div>
+                        <div class="card-body">
+                            <div class="h5">&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></div>
+                            <p> <i class="fa-solid fa-hand-point-right"></i> <a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</a></p>
+                            <hr>
+                            <div class="mb-3 text-muted"> 
+                                <span class="d-inline-block me-2"> 
+                                    <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
+                                </span> 
+                                <span class="d-inline-block me-2"> 
+                                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.fuel_type }}
+                                </span> 
+                                <span class="d-inline-block me-2"> 
+                                    <i class="fa-solid fa-gear"></i> {{ vehicle.gear_type }}
+                                </span>                                
                             </div>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="text-center">You do not have any vehicle yet in your library.</p>
+                    <p>This vendor has no car for rentals yet.</p>
                 {% endfor %}
+                {% include "partials/_pagination.html" with page_obj=vehicles %}
             </div>
-        </div>
+        </main>
     </div>
-</section>
-
+</div>
 
 {% endblock %}

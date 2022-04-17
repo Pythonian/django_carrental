@@ -26,4 +26,6 @@ urlpatterns = [
          views.vendor_update_profile, name='vendor_update_profile'),
     path('vendor/my-vehicles/',
          views.vendor_manage_vehicles, name='vendor_manage_vehicles'),
+    path('vendor/<str:username>/',
+         views.vendor_profile, name='vendor_profile'),
 ]

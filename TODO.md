@@ -24,4 +24,3 @@ Vendor profile:
 * Car booking report
 * Send mail to user informing them that it's time to return vehicle
 * Vendor can manage returned vehicle to make it available
-* Admin customize

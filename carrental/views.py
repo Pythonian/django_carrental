@@ -30,6 +30,7 @@ def search(request):
     areas = Area.objects.all()
 
     car_name_query = request.GET.get('car_name')
+    # date_min and date_max follows same pattern wih price filter
     min_price_query = request.GET.get('min_price')
     max_price_query = request.GET.get('max_price')
     area_query = request.GET.get('area')
@@ -57,6 +58,11 @@ def search(request):
 
     if is_valid_query_paramter(fuel_type_query) and fuel_type_query != '--Fuel Type--':
         qs = qs.filter(fuel_type=fuel_type_query)
+
+    # if availabile == 'on':
+    #     qs = qs.filter(is_available=True)
+    # elif not_availabile == 'on':
+    #     qs = qs.filter(is_available=False)
 
     context = {
         'vehicles': qs,

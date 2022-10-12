@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+{% load crispy_forms_tags %}
 
 {% block title %}{{ vehicle.name }}{% endblock %}
 
@@ -36,16 +37,16 @@
                 </section>
             </article>
         </div>
-        <!-- Side widgets-->
         <div class="col-lg-4">
+            
             {% if request.user.is_authenticated %}
-                {% if not request.user.is_vendor %}
+                {% if not request.user.is_vendor and request.user.customer_profile.verified  %}
                 <div class="card mb-4">
                     <div class="card-header">Book Now</div>
                     <div class="card-body">
                         <form method="post" action="">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {{ form|crispy }}
                             <input type="submit" class="btn btn-success" value="Place booking" />
                         </form>
                     </div>
@@ -121,6 +122,12 @@
                 </div>
             </div>            
         </div>
+    </div>
+    <div class="row gx-5 my-5">
+        <h3 class="mb-5">Recommended Vehicles</h3>
+        {% for vehicle in recommended_vehicles %}
+        {% include 'partials/_car_listings.html' %}
+        {% endfor %}
     </div>
 </div>
 

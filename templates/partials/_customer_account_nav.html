@@ -1,0 +1,10 @@
+<div class="card p-3 mb-4">
+    <nav class="nav flex-column nav-pills">
+        <a class="nav-link {% url 'account:profile' as profile_url %}{% if request.get_full_path == profile_url %}active{% endif %}"
+            href="{% url 'account:profile' %}">My Profile</a>
+        <a class="nav-link {% url 'account:settings' as settings_url %}{% if request.get_full_path == settings_url %}active{% endif %}"
+            href="{% url 'account:settings' %}">Settings</a>
+        <a class="nav-link {% url 'account:password_change' as password_change_url %}{% if request.get_full_path == password_change_url %}active{% endif %}"
+            href="{% url 'account:password_change' %}">Change Password</a>
+    </nav>
+</div>

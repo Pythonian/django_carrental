@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <aside class="col-lg-3">
+                {% include 'partials/_account_nav.html' %}
+            </aside>
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <header class="d-md-flex">
+                            <div class="flex-shrink-0 circle rounded-circle text-center bg-primary">
+                                <span
+                                    class="initials position-relative lh-1">{{ request.user|make_list|first|title }}</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="m-0">{{ request.user.get_full_name|default:request.user.username|title }}
+                                </h5>
+                                <small>Registered {{ request.user.date_joined|naturalday }}</small>
+                            </div>
+                            <div>
+                                <a href="{% url 'account:settings' %}" class="btn btn-sm btn-outline-primary">Edit
+                                    Profile</a>
+                            </div>
+                        </header>
+                    </div>
+                </div>
+                <h4 class="mb-4">My Materials Library</h4>
+                <div class="row">
+                    {% for material in materials %}
+                    {% include 'partials/_material_item.html' %}
+                    {% empty %}
+                    <p class="text-center mt-5">No material in your library yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

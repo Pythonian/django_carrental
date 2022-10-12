@@ -6,7 +6,7 @@
 
 <section class="py-5 bg-dark">
     <div class="container px-5 my-5">
-        <div class="text-center mb-5 text-white">
+        <div class="mb-5 text-white">
             <h1 class="fw-bolder">Manage Vehicles</h1>
         </div>
     </div>
@@ -14,13 +14,62 @@
 
 <section class="py-5">
     <div class="container px-5 my-5">
-        <div class="row gx-5">
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vehicle Name</th>
+                            <th>License Plate</th>
+                            <th>Price</th>
+                            <th>Car Type</th>
+                            <th>Gear Type</th>
+                            <th>Fuel Type</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vehicle in vehicles %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }}</a>
+                                <br />
+                                <small>Model: {{ vehicle.model }}</small>
+                            </td>
+                            <td>{{ vehicle.license_plate }}</td>
+                            <td>{{ vehicle.price }}</td>
+                            <td>{{ vehicle.car_type }}</td>
+                            <td>{{ vehicle.gear_type }}</td>
+                            <td>{{ vehicle.fuel_type }}</td>
+                            <td>
+                                <span class="badge text-bg-success">Available</span>
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm" href="{% url 'vehicle:update' vehicle.id %}">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="{% url 'vehicle:delete' vehicle.id %}">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %} No vehicle listing
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- <div class="row gx-5">
             {% for vehicle in vehicles %}
             {% include 'partials/_car_listings.html' %}
             {% empty %} No vehicle listing
             {% endfor %}
-        </div>
-        {% include 'partials/_pagination.html' with page_obj=vehicles %}
+        </div> -->
     </div>
 </section>
 

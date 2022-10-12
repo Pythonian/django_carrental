@@ -104,7 +104,7 @@ def vendor_update_profile(request):
 @login_required
 def vendor_manage_vehicles(request):
     vehicles = Vehicle.objects.filter(vendor=request.user)
-    vehicles = mk_paginator(request, vehicles, 2)
+    vehicles = mk_paginator(request, vehicles, 20)
     return render(
         request, 'vendor/vehicles.html', {'vehicles': vehicles})
 

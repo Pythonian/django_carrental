@@ -26,6 +26,7 @@ def vehicle_list(request):
 
 def vehicle_detail(request, pk):
     vehicle = get_object_or_404(Vehicle, id=pk)
+    recommended_vehicles = Vehicle.objects.exclude(id=vehicle.id).order_by('?')[:3]
     compared = bool
     if vehicle.compares.filter(id=request.user.id).exists():
         compared = True
@@ -46,6 +47,7 @@ def vehicle_detail(request, pk):
 
     return render(
         request, 'vehicle/detail.html', {'vehicle': vehicle,
+                                         'recommended_vehicles': recommended_vehicles,
                                          'compared': compared,
                                          'form': form})
 

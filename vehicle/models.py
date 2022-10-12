@@ -38,7 +38,7 @@ class Area(models.Model):
 
 class Vehicle(models.Model):
     vendor = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name='vendor')
+        User, on_delete=models.PROTECT, related_name='vehicles')
     name = models.CharField(max_length=60)
     model = models.CharField(max_length=10, blank=True)
     color = models.CharField(max_length=20)
@@ -60,6 +60,7 @@ class Vehicle(models.Model):
     area = models.ForeignKey(Area, on_delete=models.PROTECT)
     compares = models.ManyToManyField(
         User, related_name='compare', blank=True, default=None)
+    # status: if car is available or not (out for rent)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

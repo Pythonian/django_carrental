@@ -67,7 +67,7 @@
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-success">{% if create %}Upload{% else %}Update{% endif %}</button>
-            {% if not create %}<a class="btn btn-primary" href="{% url 'vehicle:detail' vehicle.id %}">Cancel</a>{% endif %}
+            {% if not create %}<a class="btn btn-primary" href="{% url 'vendor_manage_vehicles' %}">Cancel</a>{% endif %}
           </div>
         </form>
     </div>

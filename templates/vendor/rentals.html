@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Records of cars rented out{% endblock %}
+
+{% block content %}
+
+<section class="py-5 bg-dark">
+    <div class="container px-5 my-5">
+        <div class="mb-5 text-white">
+            <h1 class="fw-bolder">Records of cars rented out</h1>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vehicle Name</th>
+                            <th>Customer</th>
+                            <th>Price</th>
+                            <th>Days</th>
+                            <th>Rent between</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rent in rents %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <a href="{% url 'vehicle:detail' rent.vehicle.id %}">{{ rent.vehicle.name }}</a>
+                                <br />
+                                <small>Model: {{ rent.vehicle.model }}</small>
+                            </td>
+                            <td>{{ rent.customer }}</td>
+                            <td>&#8358;{{ rent.total_amount|intcomma }}</td>
+                            <td>{{ rent.total_days }}</td>
+                            <td>{{ rent.date_of_booking }} to {{ rent.date_of_return }}</td>
+                        </tr>
+                        {% empty %} You have not rented any vehicle yet.
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

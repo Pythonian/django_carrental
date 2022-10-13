@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from account.models import VendorProfile
+
 User = settings.AUTH_USER_MODEL
 
 
@@ -82,28 +84,28 @@ class Rent(models.Model):
     ]
     date_of_booking = models.DateField(blank=True, null=True)
     date_of_return = models.DateField(blank=True, null=True)
-    advance_amount = models.IntegerField(blank=True, null=True)
+    advance_amount = models.IntegerField(blank=True, null=True) # remove
     total_amount = models.DecimalField(
-        max_digits=6, decimal_places=2,
+        max_digits=12, decimal_places=2,
         blank=True, null=True)
     is_available = models.BooleanField(default=True)
-    is_bill_paid = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
     request_status = models.CharField(
-        max_length=1, choices=REQUEST_STATUS_CHOICES, default=PENDING)
+        max_length=1, choices=REQUEST_STATUS_CHOICES, default=PENDING) # remove
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     customer = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='rents')
-    # vendor = models.ForeignKey(
-    #     User, on_delete=models.CASCADE, related_name='vendor_requested',
-    #     blank=True, null=True)
+    vendor = models.ForeignKey(
+        VendorProfile, on_delete=models.CASCADE, related_name='rents')
+    paystack_id = models.CharField(max_length=150, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
     def __str__(self):
-        return f"{self.vehicle.name}"
+        return f"Rent #{self.id}: {self.vehicle.name}"
 
     @property
     def total_days(self):

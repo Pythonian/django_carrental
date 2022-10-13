@@ -2,9 +2,11 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
-from .models import User
+from django.db.models import Sum
+
+from .models import User, VendorProfile
 from . import verify
-from vehicle.models import Vehicle
+from vehicle.models import Vehicle, Rent
 from carrental.utils import mk_paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import CreateView
@@ -109,6 +111,16 @@ def vendor_manage_vehicles(request):
         request, 'vendor/vehicles.html', {'vehicles': vehicles})
 
 
+@login_required
+def vendor_manage_orders(request):
+    vendor = get_object_or_404(VendorProfile, user=request.user)
+    rents = Rent.objects.filter(vendor=vendor)
+
+    return render(request,
+                  'vendor/rentals.html',
+                  {'rents': rents,})
+
+
 class CustomerSignUpView(CreateView):
     model = User
     form_class = CustomerSignUpForm
@@ -182,3 +194,13 @@ def customer_update_profile(request):
     return render(request,
                   'customer/form.html',
                   {'form': form})
+
+
+@login_required
+def customer_previous_rentals(request):
+    user = request.user
+    rents = Rent.objects.filter(customer=user)
+
+    return render(request,
+                  'customer/rentals.html',
+                  {'rents': rents})

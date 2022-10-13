@@ -3,6 +3,11 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string
+from django.urls import reverse
+from django.conf import settings
+
 from carrental.utils import mk_paginator
 from account.models import VendorProfile
 from .models import Vehicle, Rent
@@ -36,8 +41,9 @@ def vehicle_detail(request, pk):
             rent = form.save(commit=False)
             rent.customer = request.user
             rent.vehicle = vehicle
+            rent.vendor = vehicle.vendor.vendor_profile
             rent.save()
-            request.session['rent_id'] = rent.id
+            request.session['order_id'] = rent.id
             return redirect('vehicle:confirm_booking')
         else:
             messages.warning(
@@ -54,12 +60,39 @@ def vehicle_detail(request, pk):
 
 @login_required
 def confirm_booking(request):
-    rent_id = request.session.get('rent_id')
+    rent_id = request.session.get('order_id')
     rent = get_object_or_404(Rent, id=rent_id)
 
-    return render(
-        request, 'vehicle/confirm_booking.html',
-        {'rent': rent})
+    paystack_amount = int(rent.get_total_cost * 100)
+    paystack_ref = None
+    if not paystack_ref:
+        paystack_ref = get_random_string(length=12).upper()
+        rent.paystack_id = paystack_ref
+        rent.total_amount = rent.get_total_cost
+        rent.save()
+    paystack_redirect_url = "{}?amount={}".format(
+        reverse('paystack:verify_payment',
+                args=[paystack_ref]), paystack_amount, rent)
+
+    template = 'vehicle/confirm_booking.html'
+    context = {'rent': rent,
+                   'paystack_key': settings.PAYSTACK_PUBLIC_KEY,
+                   'paystack_amount': paystack_amount,
+                   'paystack_redirect_url': paystack_redirect_url
+    }
+    return render(request, template, context)
+
+
+@csrf_exempt
+def payment_done(request):
+    rent_id = request.session.get('rent_id')
+    rent = get_object_or_404(Rent, id=rent_id)
+    return render(request, 'vehicle/invoice.html', {'rent': rent})
+
+
+@csrf_exempt
+def payment_canceled(request):
+    return render(request, 'canceled.html')
 
 
 @login_required

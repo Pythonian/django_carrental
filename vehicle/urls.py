@@ -8,6 +8,7 @@ urlpatterns = [
     path('create/', views.vehicle_create, name='create'),
     path('vendors/', views.vendor_list, name='vendors'),
     path('compare/', views.compare_vehicles, name='compare'),
+    path('done/', views.payment_done, name='payment_done'),
     path('confirm-booking/',
          views.confirm_booking, name='confirm_booking'),
     path('add-to-compare/<int:pk>/',

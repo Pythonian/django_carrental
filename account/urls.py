@@ -15,6 +15,8 @@ urlpatterns = [
          views.customer_create_profile, name='customer_create_profile'),
     path('customer/update-profile/',
          views.customer_update_profile, name='customer_update_profile'),
+    path('customer/my-rentals/',
+         views.customer_previous_rentals, name='customer_previous_rentals'),
     path('customer/verify/',
          views.customer_verification, name='customer_verification'),
 
@@ -26,6 +28,8 @@ urlpatterns = [
          views.vendor_update_profile, name='vendor_update_profile'),
     path('vendor/my-vehicles/',
          views.vendor_manage_vehicles, name='vendor_manage_vehicles'),
+     path('vendor/orders/',
+         views.vendor_manage_orders, name='vendor_manage_orders'),
     path('vendor/<str:username>/',
          views.vendor_profile, name='vendor_profile'),
 ]

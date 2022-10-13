@@ -24,6 +24,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('vehicles/', include('vehicle.urls', namespace='vehicle')),
     path('search/', search, name='search'),
+    path('paystack/', include(('paystack.frameworks.django.urls', 'paystack'), namespace='paystack')),
     path('', home, name='home'),
 ]
 

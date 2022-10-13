@@ -30,10 +30,10 @@
                                     <li><a class="dropdown-item" href="{% url 'vehicle:create' %}">Upload Vehicle</a></li>
                                     <li><a class="dropdown-item" href="{% url 'vendor_update_profile' %}">Update Profile</a></li>
                                     <li><a class="dropdown-item" href="{% url 'vendor_manage_vehicles' %}">Manage Vehicles</a></li>
-                                    <li><a class="dropdown-item" href="">Manage Order Rentals</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'vendor_manage_orders' %}">Manage Order Rentals</a></li>
                                 {% else %}
                                     <li><a class="dropdown-item" href="{% url 'customer_update_profile' %}">Update Profile</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Previous Rentals</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'customer_previous_rentals' %}">Previous Rentals</a></li>
                                 {% endif %}
                                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                                 {% else %}

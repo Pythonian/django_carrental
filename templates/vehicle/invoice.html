@@ -1,3 +1,8 @@
+{% extends "base.html" %} 
+
+{% block title %}Payment successful{% endblock %}
+
+{% block content %}
 <section class="">
     <div class="container">
       <div class="row">
@@ -11,7 +16,7 @@
               <div class="col-12">
                 <h4>
                   <i class="fas fa-globe"></i> AdminLTE, Inc.
-                  <small class="float-right">Date: 2/10/2014</small>
+                  <small class="float-right">Date: {{ rent.created|date:'d/m/Y' }}</small>
                 </h4>
               </div>
               <!-- /.col -->
@@ -41,10 +46,10 @@
               </div>
               <!-- /.col -->
               <div class="col-sm-4 invoice-col">
-                <b>Invoice #007612</b><br>
+                <b>Invoice #{{ rent.id }}</b><br>
                 <br>
-                <b>Order ID:</b> 4F3S8J<br>
-                <b>Payment Due:</b> 2/22/2014<br>
+                <b>Order ID:</b> {{ rent.paystack_id }}<br>
+                <b>Payment:</b> {{ rent.payment }}<br>
                 <b>Account:</b> 968-34567
               </div>
               <!-- /.col -->
@@ -67,31 +72,10 @@
                   <tbody>
                   <tr>
                     <td>1</td>
-                    <td>Call of Duty</td>
-                    <td>455-981-221</td>
-                    <td>El snort testosterone trophy driving gloves handsome</td>
-                    <td>$64.50</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Need for Speed IV</td>
-                    <td>247-925-726</td>
-                    <td>Wes Anderson umami biodiesel</td>
-                    <td>$50.00</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Monsters DVD</td>
-                    <td>735-845-642</td>
-                    <td>Terry Richardson helvetica tousled street art master</td>
-                    <td>$10.70</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Grown Ups Blue Ray</td>
-                    <td>422-568-642</td>
-                    <td>Tousled lomo letterpress</td>
-                    <td>$25.99</td>
+                    <td>{{ rent.vehicle.name }}</td>
+                    <td>{{ rent.vehicle.license_plate }}</td>
+                    <td>{{ rent.vehicle.description|truncatechars:50 }}</td>
+                    <td>{{ rent.get_total_cost }}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -162,3 +146,5 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
+
+{% endblock %}

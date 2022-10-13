@@ -38,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'account.apps.AccountConfig',
+    'vehicle.apps.VehicleConfig',
+
     'crispy_forms',
     'crispy_bootstrap5',
     'django_cleanup',
-    'vehicle.apps.VehicleConfig',
+    'paystack.frameworks.django',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'paystack': 'paystack.frameworks.django.templatetags.paystack',
+            },
         },
     },
 ]
@@ -149,3 +155,7 @@ LOGIN_REDIRECT_URL = 'home'
 
 TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+
+PAYSTACK_PUBLIC_KEY = config('PAYSTACK_PUBLIC_KEY')
+PAYSTACK_SECRET_KEY = config('PAYSTACK_SECRET_KEY')
+PAYSTACK_SUCCESS_URL = 'vehicle:payment_done'

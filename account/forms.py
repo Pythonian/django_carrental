@@ -79,7 +79,7 @@ class CustomerProfileForm(forms.ModelForm):
         self.fields['government_id'].widget.attrs.update(
             {'class': 'form-control', 'rows': '5'})
         self.fields['phone_number'].widget.attrs.update(
-            {'class': 'form-control'})
+            {'class': 'form-control', 'placeholder': '+2348031234567'})
         self.fields['city'].widget.attrs.update(
             {'class': 'form-control'})
         self.fields['state'].widget.attrs.update(

@@ -15,7 +15,7 @@
                     <h4 class="card-title mt-3">{{ user.vendor_profile.company_name }}</h4>
                     <p>{{ user.vendor_profile.about }}</p>
                     <hr>
-                    <p class="text-muted"> <i class="fa-solid fa-map-marker-alt"></i> {{ user.vendor_profile.address }}, {{ user.vendor_profile.city }}, {{ user.vendor_profile.state }}
+                    <p class="text-body-secondary"> <i class="fa-solid fa-map-marker-alt"></i> {{ user.vendor_profile.address }}, {{ user.vendor_profile.city }}, {{ user.vendor_profile.state }}
                     </p>
                     <hr>
                     <a href="mailto:{{ user.email }}" class="btn btn-warning"><i class="fa-solid fa-envelope"></i> Send mail </a> 
@@ -32,10 +32,10 @@
                         <img src="{{ vehicle.image.url }}" class="card-img-top" height="200" alt="{{ vehicle.name }}">
                         <div class="position-absolute text-start top-0 start-0 w-100 p-2"> <span class="badge p-2 bg-primary"><i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.area }}</span> </div>
                         <div class="card-body">
-                            <div class="h5">&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></div>
+                            <div class="h5">&#8358;{{ vehicle.price }} <small class="text-body-secondary">/ day</small></div>
                             <p> <i class="fa-solid fa-hand-point-right"></i> <a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</a></p>
                             <hr>
-                            <div class="mb-3 text-muted"> 
+                            <div class="mb-3 text-body-secondary"> 
                                 <span class="d-inline-block me-2"> 
                                     <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
                                 </span> 

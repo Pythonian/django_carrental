@@ -44,7 +44,7 @@
                             </div>
                             <div class="flex-grow-1 ms-3 p-3">
                                 <a href="{# url 'vehicle_detail' vehicle.id #}" class="h5 mb-1 title">{{ vehicle.title }}</a>
-                                <p class="mb-3 text-muted">{{ vehicle.author }}</p>
+                                <p class="mb-3 text-body-secondary">{{ vehicle.author }}</p>
                                 <div class="mb-3">{{ vehicle.summary|linebreaks }}</div>
                                 <div class="row row-cols-auto gx-2 gy-3 align-items-center">
                                     {% if request.user.is_authenticated %}

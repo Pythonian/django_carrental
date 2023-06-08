@@ -1,22 +1,47 @@
-<div class="col-lg-4 col-md-6">
-    <div class="card mb-4 shadow border-0">
-        <img src="{{ vehicle.image.url }}" class="card-img-top" height="200" alt="{{ vehicle.name }}">
-        <div class="position-absolute text-start top-0 start-0 w-100 p-2"> <span class="badge p-2 bg-primary"><i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.area }}</span> </div>
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card shadow border-0 bg-white h-100">
+        <img src="{{ vehicle.image.url }}" class="card-img-top rounded-top rounded-4" height="200" alt="{{ vehicle.name }}">
+        {% if vehicle.model %}<div class="position-absolute text-start top-0 start-0 w-100 p-2"> <span class="badge p-2 bg-dark"><i class="fa-solid fa-circle me-1"></i> {{ vehicle.model }}</span> </div>{% endif %}
         <div class="card-body">
-            <div class="h5">&#8358;{{ vehicle.price }} <small class="text-muted">/ day</small></div>
-            <p> <i class="fa-solid fa-hand-point-right"></i> <a href="{% url 'vehicle:detail' vehicle.id %}">{{ vehicle.name }} {% if vehicle.model %}({{ vehicle.model }}){% endif %}</a></p>
-            <hr>
-            <div class="mb-3 text-muted"> 
-                <span class="d-inline-block me-2"> 
-                    <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
-                </span> 
-                <span class="d-inline-block me-2"> 
-                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.fuel_type }}
-                </span> 
-                <span class="d-inline-block me-2"> 
-                    <i class="fa-solid fa-gear"></i> {{ vehicle.gear_type }}
-                </span>                                
+            <h5>{{ vehicle.name }}</h5>
+            <div class="d-flex gap-1">
+                <i class="fa-solid fa-star text-warning small lh-base"></i>
+                <i class="fa-solid fa-star text-warning small lh-base"></i>
+                <i class="fa-solid fa-star text-warning small lh-base"></i>
+                <i class="fa-solid fa-star text-warning small lh-base"></i>
+                <span class="d-inline-block lh-sm ms-1">(4.0)</span>
             </div>
+            <div class="border-top my-3"></div>
+            <div class="mb-3 text-body-secondary row">
+                <div class="col-4 mb-3">
+                    <i class="fa-solid fa-chair"></i> {{ vehicle.no_of_seats }} seat{{ vehicle.no_of_seats|pluralize }}
+                </div>
+                <div class="col-4 mb-3">
+                    <i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.car_type }}
+                </div>
+                <div class="col-4 mb-3">
+                    <i class="fa-solid fa-gear"></i> {{ vehicle.gear_type }}
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-droplet"></i> {{ vehicle.color }}
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-gas-pump"></i> {{ vehicle.fuel_type }}
+                </div>
+                <div class="col-4">
+                    <i class="fa-solid fa-gear"></i> {{ vehicle.gear_type }}
+                </div>
+            </div>
+            <div class="border-top my-3"></div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between">
+                    <div class="text-body-secondary"> 
+                        <i class="fa-solid fa-map-marker-alt"></i> {{ vehicle.area }}
+                    </div>
+                    <div class="h4 text-warning-emphasis">&#8358;{{ vehicle.price }} <small class="text-body-secondary h6">/ Day</small></div>
+                </div>
+            </div>
+            <a href="{% url 'vehicle:detail' vehicle.id %}" class="btn btn-dark w-100"><i class="fa-regular fa-calendar me-1"></i> Rent Now</a>
         </div>
     </div>
 </div>

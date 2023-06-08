@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -7,89 +8,105 @@
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-7">
                 <div class="my-5">
-                    <h1 class="display-5 fw-bolder text-white mb-2">Car Rental Service for Multiple Car Vendors</h1>
+                    <span class="bg-white rounded-5 px-3 py-2"><i class="fa-solid fa-thumbs-up text-success"></i> 100% Trusted car rental platform in the World</span>
+                    <h1 class="display-5 fw-bolder text-white mb-3 mt-4">
+                        Find Your Best
+                        <span class="text-warning d-block">Dream Car for Rental</span>
+                    </h1>
                     <p class="lead fw-normal text-white-50 mb-4">We provide effective services for customers in need of vehicles to link up with car vendors who have cars available for rentals.</p>
-                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        {% if request.user.is_authenticated %}
-                            {% if request.user.is_vendor %}
-                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'vehicle:create' %}">Upload new Car</a>
-                            {% else %}
-                            <a class="btn btn-outline-light btn-lg px-4" href="{% url 'vehicle:list' %}">Find Available Cars</a>
-                            {% endif %}
-                        {% else %}
-                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'vendor_signup' %}">Setup vendor account</a>
-                            <a class="btn btn-primary btn-lg px-4 me-sm-3" href="{% url 'customer_signup' %}">Register as a Customer</a>
-                        {% endif %}
-                    </div>
+                    <a class="btn btn-outline-warning px-3 py-2 me-sm-3" href="{% url 'vehicle:list' %}">View all Cars <i class="fa-solid fa-arrow-right ps-1"></i></a>
                 </div>
             </div>
             <div class="col-lg-5">
-                <form action="{% url 'search' %}" method="get">
-                    <div class="row">
-                        <div class="col-lg-8 form-group mb-3">
-                            <input class="form-control form-control-lg" id="name" type="text" placeholder="Enter car name" name="car_name" />
-                        </div>
-                        <div class="col-lg-4 form-group mb-3">
-                            <select name="area" class="form-select form-control-lg" id="id_area">
-                                <option value="" selected>--Area--</option>
-                                {% for area in areas %}
-                                <option value="{{ area.pk }}">{{ area.city }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                       <div class="col-lg-6 form-group mb-3">
-                            <input class="form-control form-control-lg" id="min_price" type="number" placeholder="Enter min price" name="min_price" />
-                        </div>
-                        <div class="col-lg-6 form-group mb-3">
-                            <input class="form-control form-control-lg" id="max_price" type="number" placeholder="Enter max price" name="max_price" />
-                        </div> 
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 form-group mb-3">
-                            <select name="gear_type" class="form-select form-control-lg" id="id_gear_type">
-                                <option value="" selected>--Gear Type--</option>
-                                {% for gear_type in gear_types %}
-                                <option value="{{ gear_type.pk }}">{{ gear_type.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-lg-4 form-group mb-3">
-                            <select name="car_type" class="form-select form-control-lg" id="id_car_type">
-                                <option value="" selected>--Car Type--</option>
-                                {% for car_type in car_types %}
-                                <option value="{{ car_type.pk }}">{{ car_type.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-lg-4 form-group mb-3">
-                            <select name="fuel_type" class="form-select form-control-lg" id="id_fuel_type">
-                                <option value="" selected>--Fuel Type--</option>
-                                {% for fuel_type in fuel_types %}
-                                <option value="{{ fuel_type.pk }}">{{ fuel_type.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </form>
+                <img src="{% static 'car.svg' %}" class="w-100" alt="">
             </div>
         </div>
     </div>
 </header>
 
-<section>
-    <div class="container px-5 my-5">
+<section class="bg-light py-lg-5">
+    <div class="container my-5">
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-8 col-xl-6">
                 <div class="text-center">
-                    <h2 class="fw-bolder">Latest Cars</h2>
-                    <p class="lead fw-normal text-muted mb-5">Available cars for rental that you can choose from</p>
+                    <h2 class="fw-bolder">Most Popular CarTypes</h2>
+                    <p class="lead fw-normal text-body-secondary mb-5">Verified and Trusted Car Rental Firms</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-2 mb row-cols-1 row-cols-sm-2 row-cols-xl-4">
+            <div class="">
+                <div class="card border-0 h-100 py-3 px-2 shadow">
+                    <div class="card-body text-center">
+                        <span class="fa-stack fa-2x text-dark mb-3">
+                            <i class="fa-solid fa-circle fa-stack-2x"></i>
+                            <i class="fa-solid fa-caravan fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h5 class="mb-2 text-warning">Caravan</h5>
+                        <span class="text-body-secondary">17 Cars</span>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="card border-0 h-100 py-3 px-2 shadow">
+                    <div class="card-body text-center">
+                        <span class="fa-stack fa-2x text-dark mb-3">
+                            <i class="fa-solid fa-circle fa-stack-2x"></i>
+                            <i class="fa-solid fa-van-shuttle fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h5 class="mb-2 text-warning">Shuttle Van</h5>
+                        <span class="text-body-secondary">17 Cars</span>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="card border-0 h-100 py-3 px-2 shadow">
+                    <div class="card-body text-center">
+                        <span class="fa-stack fa-2x text-dark mb-3">
+                            <i class="fa-solid fa-circle fa-stack-2x"></i>
+                            <i class="fa-solid fa-truck fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h5 class="mb-2 text-warning">Truck</h5>
+                        <span class="text-body-secondary">17 Cars</span>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="card border-0 h-100 py-3 px-2 shadow">
+                    <div class="card-body text-center">
+                        <span class="fa-stack fa-2x text-dark mb-3">
+                            <i class="fa-solid fa-circle fa-stack-2x"></i>
+                            <i class="fa-solid fa-car-side fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h5 class="mb-2 text-warning">Sedan</h5>
+                        <span class="text-body-secondary">17 Cars</span>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="card border-0 h-100 py-3 px-2 shadow">
+                    <div class="card-body text-center">
+                        <span class="fa-stack fa-2x text-dark mb-3">
+                            <i class="fa-solid fa-circle fa-stack-2x"></i>
+                            <i class="fa-solid fa-bus-simple fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h5 class="mb-2 text-warning">Bus</h5>
+                        <span class="text-body-secondary">17 Cars</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="bg-white py-lg-5">
+    <div class="container my-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6">
+                <div class="text-center">
+                    <h2 class="fw-bolder text-warning-emphasis">Explore Featured Cars</h2>
+                    <p class="lead fw-normal text-body-secondary mb-5">Available cars for rental that you can choose from</p>
                 </div>
             </div>
         </div>
@@ -102,24 +119,10 @@
     </div>
 </section>
 
-<section>
-    <div class="container px-5 my-5">
-        <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-                <div class="text-center">
-                    <h2 class="fw-bolder">Featured Vendors</h2>
-                    <p class="lead fw-normal text-muted mb-5">Verified and Trusted Car Rental Firms</p>
-                </div>
-            </div>
-        </div>
-        <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4">
-            {% for vendor in vendors %}
-            {% include 'partials/_vendor_listings.html' %}
-            {% empty %} No vendor listing
-            {% endfor %}
-        </div>
+<section class="text-bg-dark py-lg-5">
+    <div class="container my-5">
+
     </div>
 </section>
-
 
 {% endblock %}

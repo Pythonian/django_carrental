@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', 'django-insecure')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -153,9 +153,9 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 
-TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
-TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID', 'ACef9f8974f1598b49fb64bfe3f242d24b')
+TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN', '77e9b84c63a6f81fac15978b334e6acc')
 
-PAYSTACK_PUBLIC_KEY = config('PAYSTACK_PUBLIC_KEY')
-PAYSTACK_SECRET_KEY = config('PAYSTACK_SECRET_KEY')
+PAYSTACK_PUBLIC_KEY = config('PAYSTACK_PUBLIC_KEY', 'xx')
+PAYSTACK_SECRET_KEY = config('PAYSTACK_SECRET_KEY', 'xx')
 PAYSTACK_SUCCESS_URL = 'vehicle:payment_done'

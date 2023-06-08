@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Sum
 
 from .models import User, VendorProfile
-from . import verify
+# from . import verify
 from vehicle.models import Vehicle, Rent
 from carrental.utils import mk_paginator
 from django.shortcuts import redirect, render, get_object_or_404
@@ -144,7 +144,7 @@ def customer_create_profile(request):
             customer = form.save(commit=False)
             customer.user = request.user
             customer.save()
-            verify.send(form.cleaned_data.get('phone_number'))
+            # verify.send(form.cleaned_data.get('phone_number'))
             messages.success(
                 request, 'Profile created. Please verify your phone number')
             return redirect('customer_verification')
@@ -165,10 +165,10 @@ def customer_verification(request):
         form = VerifyForm(request.POST)
         if form.is_valid():
             code = form.cleaned_data.get('code')
-            if verify.check(request.user.customer_profile.phone_number, code):
-                request.user.customer_profile.verified = True
-                request.user.customer_profile.save()
-                return redirect('home')
+            # if verify.check(request.user.customer_profile.phone_number, code):
+            #     request.user.customer_profile.verified = True
+            #     request.user.customer_profile.save()
+            #     return redirect('home')
     else:
         form = VerifyForm()
     return render(request, 'customer/verify.html', {'form': form})
